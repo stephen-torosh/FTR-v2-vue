@@ -7,7 +7,14 @@ const router = createRouter({
     {
       path: '/',
       name: 'desktop',
-      component: Desktop
+      component: Desktop,
+      children: [
+        {
+          path: 'app/:appname',
+          name: 'app',
+          component: () => import('@/views/layouts/AppWindowView.vue')
+        }
+      ]
     }
   ]
 })

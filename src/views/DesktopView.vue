@@ -4,6 +4,7 @@ import browserIcon from '@/assets/images/browser.png'
 import settingsIcon from '@/assets/images/settings.png'
 import firetrLogo from '@/assets/images/fireTR-OS-logo.png'
 import BaseAppLauncher from '@/components/base-components/BaseAppLauncher.vue'
+import LaunchWindow from '@/components/LaunchWindowView.vue'
 
 const appsIcons = [
   {
@@ -22,6 +23,9 @@ const appsIcons = [
     imageAlt: 'settings icon'
   }
 ]
+
+
+
 </script>
 
 <template>
@@ -38,11 +42,18 @@ const appsIcons = [
     </div>
     <div class="navbar">
       <div class="navbar-left">
-        <img class="fireTR-icon" :src="firetrLogo" alt="" height="80%" />
+        <img
+          class="fireTR-icon"
+          onclick=""
+          :src="firetrLogo"
+          alt=""
+          height="80%"
+        />
         FireTR-v2
       </div>
       <div id="navbar-right">00:00</div>
     </div>
+    <LaunchWindow id="launchwindow" />
     <RouterView />
   </div>
 </template>
