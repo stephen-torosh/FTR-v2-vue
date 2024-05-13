@@ -6,8 +6,19 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      redirect: '/desktop'
+    },
+    {
+      path: '/desktop',
       name: 'desktop',
-      component: Desktop
+      component: Desktop,
+      children: [
+        {
+          path: '/app/:appName',
+          name: 'app',
+          component: () => import('@/views/layouts/AppWindowView.vue'),
+        }
+      ]
     }
   ]
 })

@@ -4,7 +4,7 @@ defineProps(['name', 'image', 'image-alt'])
 </script>
 
 <template>
-  <RouterLink :to="'/'+name">
+  <RouterLink :to="{path: `/app/${name}`}">
     <div class="app-icon app-icon-wrapper">
       <img class="app-icon__image" :src="image" :alt="image - alt" width="50%" height="50%" />
       {{ name }}
