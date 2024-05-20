@@ -6,6 +6,10 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      redirect: '/desktop'
+    },
+    {
+      path: '/desktop',
       name: 'desktop',
       component: Desktop,
       children: [
