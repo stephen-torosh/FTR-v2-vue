@@ -1,24 +1,41 @@
 <script setup>
-import {useRoute, useRouter} from 'vue-router'
-import { defineAsyncComponent, computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import Browser from '@/components/apps/Browser.vue'
+import FTR from '@/components/apps/FTR.vue'
+import Settings from '@/components/apps/Settings.vue'
+import Calculator from '@/components/apps/Calculator.vue'
+import { computed } from 'vue'
 
-const route = useRoute();
-const router = useRouter();
+const route = useRoute()
+const router = useRouter()
 
-const activeComponent = computed(() => defineAsyncComponent(() => import(`/src/components/${route.params.appName}.vue`)))
+const activeComponent = computed(() => {
+  switch (route.params.appname) {
+    case 'FTR':
+      return FTR
+    case 'Browser':
+      return Browser
+    case 'settings':
+      return Settings
+    case 'calculator':
+      return Calculator
+    default:
+      return FTR
+  }
+})
 </script>
 
 <template>
   <div class="app-window-wrapper">
     <div class="app-window">
-      <h4>{{route.params.appName}}</h4>
-      <button @click="router.push({name: 'desktop'})" style="margin-right: 10px">X</button>
+      <h4>{{ route.params.appname }}</h4>
+      <button @click="router.push({ name: 'desktop' })" style="margin-right: 10px">X</button>
     </div>
-    <div style="background: aliceblue; width: 100%; height: 200px;">
+    <div style="background: aliceblue; width: 100%; height: 200px">
       <component :is="activeComponent" />
     </div>
   </div>
-</template>  
+</template>
 
 <style scoped>
 h4 {

@@ -1,8 +1,22 @@
+<script setup></script>
+
 <template>
-  <div class="launch-window"></div>
+  <div class="launch-window-wrapper" @click.stop="">
+    <div class="launch-window"></div>
+  </div>
 </template>
 
 <style>
+.launch-window-wrapper {
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: calc(100vh - 50px);
+}
+
 .launch-window {
   margin-top: calc(100vh - 410px);
   margin-left: 10px;
