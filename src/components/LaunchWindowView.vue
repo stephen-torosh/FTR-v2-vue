@@ -1,7 +1,15 @@
-<script setup></script>
+<script setup>
+import { useStatusesStore } from '@/stores/statuses'
+
+const statusStore = useStatusesStore()
+
+function hideLaunchWindow() {
+  statusStore.switchMenuStatus()
+}
+</script>
 
 <template>
-  <div class="launch-window-wrapper" @click.stop="">
+  <div class="launch-window-wrapper" @click.self="hideLaunchWindow">
     <div class="launch-window"></div>
   </div>
 </template>

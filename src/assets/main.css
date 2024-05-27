@@ -30,6 +30,7 @@ body {
 .navbar {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   height: 50px;
   background-color: rgba(0, 0, 0, 0.422);
   color: white;
@@ -49,7 +50,6 @@ body {
 }
 
 .navbar__right {
-  justify-content: end;
   margin-right: 10px;
 }
 

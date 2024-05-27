@@ -6,8 +6,12 @@ import firetrLogo from '@/assets/images/fireTR-OS-logo.png'
 import BaseAppLauncher from '@/components/base-components/BaseAppLauncher.vue'
 import LaunchWindow from '@/components/LaunchWindowView.vue'
 import calculatorIcon from '@/assets/images/calculator.svg'
+import { useStatusesStore } from '@/stores/statuses.js'
+import { storeToRefs } from 'pinia'
+import { computed } from 'vue'
 
-import { ref } from 'vue'
+const statusStore = useStatusesStore()
+const { isMenuShown } = storeToRefs(statusStore)
 
 const appsIcons = [
   {
@@ -32,11 +36,28 @@ const appsIcons = [
   }
 ]
 
-const isShowMenu = ref(false)
-
 function onLaunchClick() {
-  isShowMenu.value = !isShowMenu.value
+  statusStore.switchMenuStatus()
 }
+
+const date = new Date()
+
+let hours = date.getHours()
+let minutes = date.getMinutes()
+let seconds = date.getSeconds()
+console.log(seconds)
+let interval = (61 - seconds) * 1000
+
+setInterval(() => {
+  hours = date.getHours()
+  minutes = date.getMinutes()
+  interval = 60000
+  console.log('hello!')
+}, interval)
+
+const fullTime = computed(() => `${hours}:${minutes > 9 ? minutes : `0${minutes}`}`)
+
+console.log(date)
 </script>
 
 <template>
@@ -59,9 +80,9 @@ function onLaunchClick() {
 
         FireTR-v2
       </div>
-      <div class="navbar__right">00:00</div>
+      <div class="navbar__right">{{ fullTime }}</div>
     </div>
-    <LaunchWindow v-if="isShowMenu" id="launchwindow" />
+    <LaunchWindow v-if="isMenuShown" id="launchwindow" />
     <RouterView />
   </div>
 </template>
