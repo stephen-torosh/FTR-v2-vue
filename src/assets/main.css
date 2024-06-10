@@ -4,9 +4,34 @@
 
 /* FireInc company 2024 */
 
+@font-face {
+  font-family: 'Caveat';
+  src: url('../assets/fonts/Caveat-Regular.ttf') format('truetype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Caveat';
+  src: url('../assets/fonts/Caveat-Medium.ttf') format('truetype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Caveat';
+  src: url('../assets/fonts/Caveat-Bold.ttf') format('truetype');
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: 'Caveat';
+  src: url('../assets/fonts/Caveat-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+}
+
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 body {
   min-height: 100vh;
@@ -27,6 +52,12 @@ body {
   height: calc(100% - 50px);
 }
 
+.appsDiv a {
+  display: block;
+  width: calc(100vw / 16);
+  height: calc(100vw / 16);
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -34,7 +65,7 @@ body {
   height: 50px;
   background-color: rgba(0, 0, 0, 0.422);
   color: white;
-  font-family: cursive;
+  font-family: caveat;
 }
 
 .navbar__left,
@@ -42,6 +73,7 @@ body {
   display: flex;
   align-items: center;
   height: 100%;
+  font-size: 1.3em;
 }
 
 .navbar__left {
@@ -51,6 +83,7 @@ body {
 
 .navbar__right {
   margin-right: 10px;
+  font-size: 1.5em;
 }
 
 .fireTR-icon:hover {
@@ -61,7 +94,7 @@ body {
   background-color: rgba(255, 255, 255, 0.7);
   z-index: 1;
   position: absolute;
-  font-family: cursive;
+  font-family: caveat;
   color: white;
   top: calc(50% - 200px);
   left: calc(50% - 300px);
@@ -70,19 +103,6 @@ body {
 .desktopWindow:first-child {
   margin-top: 10px;
 }
-
-#launch {
-  display: none;
-  position: absolute;
-  z-index: 5;
-  top: calc(100% - 560px);
-  left: 10px;
-  width: 500px;
-  height: 500px;
-  background-color: rgba(255, 255, 255, 0.55);
-  border-radius: 5%;
-}
-
 .navbar__launch-button {
   background-color: transparent;
   height: 40px;

@@ -20,8 +20,8 @@ defineProps(['name', 'image', 'image-alt'])
   color: white;
   width: calc(100vw / 16);
   height: calc(100vw / 16);
-  font-size: 1em;
-  font-family: cursive;
+  font-size: 1.5em;
+  font-family: caveat;
 }
 
 .app-icon-wrapper:hover {

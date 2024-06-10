@@ -31,19 +31,28 @@ const activeComponent = computed(() => {
       <h4>{{ route.params.appname }}</h4>
       <button @click="router.push({ name: 'desktop' })" style="margin-right: 10px">X</button>
     </div>
-    <div style="background: aliceblue; width: 100%; height: 200px">
+    <div class="component-wrapper">
       <component :is="activeComponent" />
     </div>
   </div>
 </template>
 
 <style scoped>
+.component-wrapper {
+  background: aliceblue;
+  width: 100%;
+  min-width: 300px;
+  height: calc(100% - 30px);
+}
+
 h4 {
   margin-left: 10px;
   color: #ffffff;
 }
 .app-window-wrapper {
   position: absolute;
+  resize: both;
+  overflow: auto;
   top: 40%;
   width: 55%;
   left: 50%;

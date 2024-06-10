@@ -7,11 +7,9 @@ import BaseAppLauncher from '@/components/base-components/BaseAppLauncher.vue'
 import LaunchWindow from '@/components/LaunchWindowView.vue'
 import calculatorIcon from '@/assets/images/calculator.svg'
 import { useStatusesStore } from '@/stores/statuses.js'
-import { storeToRefs } from 'pinia'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 
 const statusStore = useStatusesStore()
-const { isMenuShown } = storeToRefs(statusStore)
 
 const appsIcons = [
   {
@@ -40,30 +38,25 @@ function onLaunchClick() {
   statusStore.switchMenuStatus()
 }
 
-const date = new Date()
-
-let hours = date.getHours()
-let minutes = date.getMinutes()
-let seconds = date.getSeconds()
-console.log(seconds)
-let interval = (61 - seconds) * 1000
+const date = ref(new Date())
 
 setInterval(() => {
-  hours = date.getHours()
-  minutes = date.getMinutes()
-  interval = 60000
-  console.log('hello!')
-}, interval)
+  date.value = new Date()
+}, 1000)
 
-const fullTime = computed(() => `${hours}:${minutes > 9 ? minutes : `0${minutes}`}`)
+const fullTime = computed(
+  () =>
+    `${date.value.getHours()}:${date.value.getMinutes() > 9 ? date.value.getMinutes() : `0${date.value.getMinutes()}`}`
+)
 
-console.log(date)
+function hideLaunchWindow() {
+  statusStore.switchMenuStatus()
+}
 </script>
 
 <template>
-  <div id="desktop">
+  <div @click.self="hideLaunchWindow" id="desktop">
     <div class="appsDiv">
-      <div id="launch"></div>
       <BaseAppLauncher
         v-for="app in appsIcons"
         :key="app.title"
@@ -82,7 +75,7 @@ console.log(date)
       </div>
       <div class="navbar__right">{{ fullTime }}</div>
     </div>
-    <LaunchWindow v-if="isMenuShown" id="launchwindow" />
+    <LaunchWindow id="launchwindow" />
     <RouterView />
   </div>
 </template>
