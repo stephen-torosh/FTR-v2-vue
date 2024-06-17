@@ -8,8 +8,10 @@ import LaunchWindow from '@/components/LaunchWindowView.vue'
 import calculatorIcon from '@/assets/images/calculator.svg'
 import { useStatusesStore } from '@/stores/statuses.js'
 import { computed, ref } from 'vue'
+import { storeToRefs } from 'pinia'
 
 const statusStore = useStatusesStore()
+const { isMenuShown } = storeToRefs(statusStore)
 
 const appsIcons = [
   {
@@ -35,7 +37,11 @@ const appsIcons = [
 ]
 
 function onLaunchClick() {
-  statusStore.switchMenuStatus()
+  if (isMenuShown.value) {
+    statusStore.switchMenuStatus(false)
+    return 0
+  }
+  statusStore.switchMenuStatus(true)
 }
 
 const date = ref(new Date())
@@ -50,13 +56,14 @@ const fullTime = computed(
 )
 
 function hideLaunchWindow() {
-  statusStore.switchMenuStatus()
+  statusStore.switchMenuStatus(false)
+  console.log('hideLaunchWindow')
 }
 </script>
 
 <template>
-  <div @click.self="hideLaunchWindow" id="desktop">
-    <div class="appsDiv">
+  <div id="desktop">
+    <div @click="hideLaunchWindow" class="appsDiv">
       <BaseAppLauncher
         v-for="app in appsIcons"
         :key="app.title"

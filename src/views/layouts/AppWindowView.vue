@@ -1,9 +1,9 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
-import Browser from '@/components/apps/Browser.vue'
-import FTR from '@/components/apps/FTR.vue'
-import Settings from '@/components/apps/Settings.vue'
-import Calculator from '@/components/apps/Calculator.vue'
+import Browser from '@/components/apps/BrowserView.vue'
+import FTR from '@/components/apps/FTRView.vue'
+import Settings from '@/components/apps/SettingsView.vue'
+import Calculator from '@/components/apps/CalculatorView.vue'
 import { computed } from 'vue'
 
 const route = useRoute()
@@ -29,7 +29,9 @@ const activeComponent = computed(() => {
   <div class="app-window-wrapper">
     <div class="app-window">
       <h4>{{ route.params.appname }}</h4>
-      <button @click="router.push({ name: 'desktop' })" style="margin-right: 10px">X</button>
+      <button @click="router.push({ name: 'desktop' })" style="margin-right: 10px; color: black">
+        X
+      </button>
     </div>
     <div class="component-wrapper">
       <component :is="activeComponent" />
@@ -42,21 +44,18 @@ const activeComponent = computed(() => {
   background: aliceblue;
   width: 100%;
   min-width: 300px;
+  min-height: calc(100% - 30px);
+  height: 100%;
   height: calc(100% - 30px);
+}
+
+.component-wrapper * {
+  color: black;
 }
 
 h4 {
   margin-left: 10px;
   color: #ffffff;
-}
-.app-window-wrapper {
-  position: absolute;
-  resize: both;
-  overflow: auto;
-  top: 40%;
-  width: 55%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 .app-window {
   display: flex;
@@ -67,11 +66,14 @@ h4 {
 }
 
 .app-window-wrapper {
-  transform: translate(-50%, 0);
   position: absolute;
-  top: calc(50% - 215px);
-  width: 600px;
-  left: 50%;
+  left: 50vw;
+  top: 50vh;
+  min-height: 150px;
+  min-width: 300px;
+  height: 600px;
+  width: 1200px;
+  transform: translate(-50%, -50%);
 }
 
 .app-window-main {

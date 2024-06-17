@@ -5,8 +5,8 @@ export const useStatusesStore = defineStore('statuses', {
     return { isMenuShown: false }
   },
   actions: {
-    switchMenuStatus() {
-      this.isMenuShown = !this.isMenuShown
+    switchMenuStatus(status = true) {
+      this.isMenuShown = status
     }
   }
 })
