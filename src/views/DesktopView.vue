@@ -7,11 +7,15 @@ import BaseAppLauncher from '@/components/base-components/BaseAppLauncher.vue'
 import LaunchWindow from '@/components/LaunchWindowView.vue'
 import calculatorIcon from '@/assets/images/calculator.svg'
 import { useStatusesStore } from '@/stores/statuses.js'
+import { useSettingsStore } from '@/stores/settings'
 import { computed, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 
 const statusStore = useStatusesStore()
 const { isMenuShown } = storeToRefs(statusStore)
+
+const settingsStore = useSettingsStore()
+const { brightness } = storeToRefs(settingsStore)
 
 const appsIcons = [
   {
@@ -62,7 +66,7 @@ function hideLaunchWindow() {
 </script>
 
 <template>
-  <div id="desktop">
+  <div id="desktop" :style="{filter: `brightness(${brightness}%)`}">
     <div @click="hideLaunchWindow" class="appsDiv">
       <BaseAppLauncher
         v-for="app in appsIcons"
