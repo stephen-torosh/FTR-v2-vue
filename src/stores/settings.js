@@ -6,7 +6,9 @@ export const useSettingsStore = defineStore('settings', {
   },
   actions: {
     updateBrightness(value) {
+      console.log(this.brigthness)
       this.brigthness = value
+      console.log(this.brigthness)
     }
   }
 })
