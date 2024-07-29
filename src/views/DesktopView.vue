@@ -6,16 +6,21 @@ import firetrLogo from '@/assets/images/fireTR-OS-logo.png'
 import BaseAppLauncher from '@/components/base-components/BaseAppLauncher.vue'
 import LaunchWindow from '@/components/LaunchWindowView.vue'
 import calculatorIcon from '@/assets/images/calculator.svg'
+import ScreenSleep from '@/components/ScreenSleep.vue'
 import { useStatusesStore } from '@/stores/statuses.js'
 import { useSettingsStore } from '@/stores/settings'
-import { computed, ref } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 
 const statusStore = useStatusesStore()
 const { isMenuShown } = storeToRefs(statusStore)
 
+onMounted(() => {
+  statusStore.startScreenSaverTimer()
+})
+
 const settingsStore = useSettingsStore()
-const { brightness } = storeToRefs(settingsStore)
+const { brightness, screenSaver } = storeToRefs(settingsStore)
 
 const appsIcons = [
   {
@@ -66,7 +71,7 @@ function hideLaunchWindow() {
 </script>
 
 <template>
-  <div id="desktop" :style="{filter: `brightness(${brightness}%)`}">
+  <div id="desktop" :style="{ filter: `brightness(${brightness}%)` }">
     <div @click="hideLaunchWindow" class="appsDiv">
       <BaseAppLauncher
         v-for="app in appsIcons"
@@ -88,5 +93,6 @@ function hideLaunchWindow() {
     </div>
     <LaunchWindow id="launchwindow" />
     <RouterView />
+    <ScreenSleep v-if="screenSaver" />
   </div>
 </template>
