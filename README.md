@@ -1,35 +1,21 @@
 # FireTR-v2
 
-This template should help get you started developing with Vue 3 in Vite.
+FireTR-v2 is still in developing, so there isn`t much information
 
-## Recommended IDE Setup
+# How to run FireTR-v2
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Install NODE.JS
 
-## Customize configuration
+`https://nodejs.org/en`
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## Install Vue framework
 
-## Project Setup
+`npm install -g @vue/cli`
+or
+`yarn global add @vue/cli`
 
-```sh
-npm install
-```
+## Run command -
 
-### Compile and Hot-Reload for Development
+`npm run dev`
 
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+## You can open it now! Enjoy

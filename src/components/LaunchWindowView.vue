@@ -63,7 +63,7 @@ const { isMenuShown } = storeToRefs(statusStore)
 .launch-window-wrapper {
   margin-top: calc(100vh - 410px);
   position: absolute;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(125, 125, 125, 0.5);
   backdrop-filter: blur(3px);
   left: -360px;
   width: 350px;

@@ -1,9 +1,12 @@
 <script setup>
 import { useSettingsStore } from '@/stores/settings.js'
+import { useStatusesStore } from '@/stores/statuses.js'
 import { storeToRefs } from 'pinia'
 
 const settingsStore = useSettingsStore()
-const { brightness, brightnessValue, screenSaver } = storeToRefs(settingsStore)
+const statusesStore = useStatusesStore()
+const { brightness, brightnessValue } = storeToRefs(settingsStore)
+const { isScreenSaverOn } = storeToRefs(statusesStore)
 </script>
 
 <template>
@@ -18,7 +21,7 @@ const { brightness, brightnessValue, screenSaver } = storeToRefs(settingsStore)
     </div>
     <div class="centered">
       Screen Saver:
-      <input type="checkbox" name="" id="" v-model="screenSaver" />
+      <input type="checkbox" name="" id="" v-model="isScreenSaverOn" />
     </div>
   </div>
 </template>

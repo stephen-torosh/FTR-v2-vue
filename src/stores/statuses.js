@@ -1,18 +1,29 @@
 import { defineStore } from 'pinia'
+import { useSettingsStore } from './settings'
 
 export const useStatusesStore = defineStore('statuses', {
   state: () => {
-    return { isMenuShown: false }
+    return { isMenuShown: false, timer: null, isScreenSaverOn: false }
   },
   actions: {
     switchMenuStatus(status = true) {
       this.isMenuShown = status
     },
     startScreenSaverTimer() {
-      let screenSaverTimer = setTimeout(() => {
-        console.log('tierm')
-      }, 1000)
+      console.log(this.isScreenSaverOn)
+      if (!this.isScreenSaverOn) return
+      const settingsStore = useSettingsStore()
+      let screenSaverTimer = () => {
+        console.log('timer out')
+        settingsStore.screenSaver = true
+      }
+      this.timer = setTimeout(screenSaverTimer, 30000)
     },
-    restartScreenSaverTimer() {}
+    restartScreenSaverTimer() {
+      const settingsStore = useSettingsStore()
+      clearTimeout(this.timer)
+      this.startScreenSaverTimer()
+      settingsStore.screenSaver = false
+    }
   }
 })

@@ -71,7 +71,11 @@ function hideLaunchWindow() {
 </script>
 
 <template>
-  <div id="desktop" :style="{ filter: `brightness(${brightness}%)` }">
+  <div
+    id="desktop"
+    :style="{ filter: `brightness(${brightness}%)` }"
+    @mousemove="statusStore.restartScreenSaverTimer()"
+  >
     <div @click="hideLaunchWindow" class="appsDiv">
       <BaseAppLauncher
         v-for="app in appsIcons"
