@@ -26,14 +26,36 @@ const fullDate = computed(
     `${WeekDays[parseInt(date.value.getDay()) - 1]} - ${date.value.getDate()} ${YearMonths[parseInt(date.value.getMonth())]}`
 )
 
+const isMinutesRotate = ref(false)
+const isHoursRotate = ref(false)
+
 setInterval(() => {
   date.value = new Date()
+  const currentdate = new Date()
+
+  if (currentdate.getSeconds() == 59) {
+    console.log('check minutes')
+    if (currentdate.getMinutes() == 59) {
+      console.log('rotate both')
+      isMinutesRotate.value = true
+      isHoursRotate.value = true
+    } else {
+      console.log('rotate minutes')
+      isMinutesRotate.value = true
+    }
+    setTimeout(() => {
+      console.log('clear')
+      isMinutesRotate.value = false
+      isHoursRotate.value = false
+    }, 2000)
+  }
 }, 1000)
 
-const fullTime = computed(
-  () =>
-    `${date.value.getHours()}:${date.value.getMinutes() > 9 ? date.value.getMinutes() : `0${date.value.getMinutes()}`}`
+const minutes = computed(() =>
+  date.value.getMinutes() > 9 ? date.value.getMinutes() : `0${date.value.getMinutes()}`
 )
+
+//date.value.getHours()
 
 const statusStore = useStatusesStore()
 
@@ -43,7 +65,19 @@ const statusStore = useStatusesStore()
 
 <template>
   <div class="main" @mousemove="statusStore.restartScreenSaverTimer()">
-    <div class="timesleeperTime">{{ fullTime }}</div>
+    <div class="scene">
+      <div class="cube-hours">
+        <div class="timesleeperTime" :class="{ 'timesleeperTime-animation': isHoursRotate }">
+          {{ date.getHours() }}
+        </div>
+      </div>
+      :
+      <div class="cube-minutes">
+        <div class="timesleeperTime" :class="{ 'timesleeperTime-animation': isMinutesRotate }">
+          {{ minutes }}
+        </div>
+      </div>
+    </div>
     <div class="timesleeperDate">{{ fullDate }}</div>
   </div>
 </template>
@@ -58,11 +92,26 @@ const statusStore = useStatusesStore()
   right: 0;
 }
 
-.timesleeperTime {
+.cube-hours,
+.cube-minutes {
+  perspective: 500px;
+  transform-style: preserve-3d;
+  transform: translateZ(-100px);
+}
+
+.scene {
   font-size: 7em;
   display: flex;
+  justify-content: center;
+}
+
+.timesleeperTime {
   width: 100%;
   justify-content: center;
+}
+
+.timesleeperTime-animation {
+  animation: clockRotation 2s 1;
 }
 
 .timesleeperDate {
@@ -70,5 +119,15 @@ const statusStore = useStatusesStore()
   width: 100%;
   justify-content: center;
   font-size: 1.5em;
+}
+@keyframes clockRotation {
+  0% {
+    transform: rotateX(0deg);
+    transform: translateZ(-100);
+  }
+  100% {
+    transform: rotateX(360deg);
+    transform: translateZ(-100);
+  }
 }
 </style>
