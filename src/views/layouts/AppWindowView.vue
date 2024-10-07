@@ -6,7 +6,6 @@ import Settings from '@/components/apps/SettingsView.vue'
 import Calculator from '@/components/apps/CalculatorView.vue'
 import { computed } from 'vue'
 
-
 const route = useRoute()
 const router = useRouter()
 

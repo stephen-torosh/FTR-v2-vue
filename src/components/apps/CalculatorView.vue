@@ -1,30 +1,86 @@
-<script></script>
+<script setup>
+import { ref } from 'vue'
+import { plus, minus, multiply, divide, doTheLastAction } from '@/helper/calculator.js'
+
+let calculatorSTR = ref('')
+
+let prevResult = 0
+
+let lastAction = ''
+
+function buttonclicked(key) {
+  console.log(Number(key))
+
+  if (Number(key) >= 0 || key === '.') {
+    calculatorSTR.value = lastAction === '=' ? key : calculatorSTR.value + key
+    lastAction = lastAction === '=' ? 'number' : lastAction
+  } else if (key == 'del') {
+    calculatorSTR.value = calculatorSTR.value.slice(0, -1)
+    lastAction = lastAction === '=' ? 'del' : lastAction
+  } else if (key == 'C') {
+    calculatorSTR.value = '0'
+    lastAction = '='
+  } else if (key === '+') {
+    prevResult = plus(prevResult, Number(calculatorSTR.value))
+    lastAction = '+'
+    calculatorSTR.value = ''
+    console.log(prevResult)
+  } else if (key === '-') {
+    prevResult = prevResult
+      ? minus(prevResult, Number(calculatorSTR.value))
+      : (prevResult = Number(calculatorSTR.value))
+    lastAction = '-'
+    calculatorSTR.value = ''
+    console.log(prevResult)
+  } else if (key === '*') {
+    prevResult = prevResult
+      ? multiply(prevResult, Number(calculatorSTR.value))
+      : (prevResult = Number(calculatorSTR.value))
+    lastAction = '*'
+    calculatorSTR.value = ''
+    console.log(prevResult)
+  } else if (key === '/') {
+    prevResult = prevResult
+      ? divide(prevResult, Number(calculatorSTR.value))
+      : (prevResult = Number(calculatorSTR.value))
+    lastAction = '/'
+    calculatorSTR.value = ''
+    console.log(prevResult)
+  } else if (key === '=') {
+    calculatorSTR.value = doTheLastAction(lastAction, prevResult, Number(calculatorSTR.value))
+    console.log(calculatorSTR.value)
+    prevResult = 0
+    lastAction = '='
+    console.log(prevResult)
+  }
+}
+</script>
 
 <template>
   <div class="wrapper">
     <div class="calculator">
-      <div class="calculator__result">0</div>
+      <div class="calculator__result">{{ calculatorSTR }}</div>
       <div class="calculator-buttons">
+        <button @click="buttonclicked('C')" class="calculator__buttons">C</button>
+        <button @click="buttonclicked('del')" class="calculator__buttons">del</button>
         <button class="calculator__buttons"></button>
-        <button class="calculator__buttons"></button>
-        <button class="calculator__buttons">C</button>
-        <button class="calculator__buttons">del</button>
-        <button class="calculator__buttons">7</button>
-        <button class="calculator__buttons">8</button>
-        <button class="calculator__buttons">9</button>
-        <button class="calculator__buttons">/</button>
-        <button class="calculator__buttons">4</button>
-        <button class="calculator__buttons">5</button>
-        <button class="calculator__buttons">6</button>
-        <button class="calculator__buttons">-</button>
-        <button class="calculator__buttons">1</button>
-        <button class="calculator__buttons">2</button>
-        <button class="calculator__buttons">3</button>
-        <button class="calculator__buttons">+</button>
-        <button class="calculator__buttons">-/+</button>
-        <button class="calculator__buttons">0</button>
-        <button class="calculator__buttons">,</button>
-        <button class="calculator__buttons">=</button>
+        <button @click="buttonclicked('*')" class="calculator__buttons">*</button>
+        <button @click="buttonclicked('7')" class="calculator__buttons">7</button>
+        <button @click="buttonclicked('8')" class="calculator__buttons">8</button>
+        <button @click="buttonclicked('9')" class="calculator__buttons">9</button>
+        <button @click="buttonclicked('/')" class="calculator__buttons">/</button>
+        <button @click="buttonclicked('4')" class="calculator__buttons">4</button>
+        <button @click="buttonclicked('5')" class="calculator__buttons">5</button>
+        <button @click="buttonclicked('6')" class="calculator__buttons">6</button>
+        <button @click="buttonclicked('-')" class="calculator__buttons">-</button>
+        <button @click="buttonclicked('1')" class="calculator__buttons">1</button>
+        <button @click="buttonclicked('2')" class="calculator__buttons">2</button>
+        <button @click="buttonclicked('3')" class="calculator__buttons">3</button>
+        <button @click="buttonclicked('+')" class="calculator__buttons">+</button>
+        <button @click="buttonclicked('-/+')" class="calculator__buttons">-/+</button>
+        <button @click="buttonclicked('0')" class="calculator__buttons">0</button>
+        <button @click="buttonclicked('.')" class="calculator__buttons">.</button>
+        <button @click="buttonclicked('=')" class="calculator__buttons">=</button>
       </div>
     </div>
   </div>
