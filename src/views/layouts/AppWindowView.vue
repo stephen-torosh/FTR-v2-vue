@@ -50,10 +50,6 @@ const activeComponent = computed(() => {
   height: calc(100% - 30px);
 }
 
-.component-wrapper * {
-  color: black;
-}
-
 h4 {
   margin-left: 10px;
   color: #ffffff;

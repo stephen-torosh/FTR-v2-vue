@@ -7,13 +7,14 @@ import BaseAppLauncher from '@/components/base-components/BaseAppLauncher.vue'
 import LaunchWindow from '@/components/LaunchWindowView.vue'
 import calculatorIcon from '@/assets/images/calculator.svg'
 import ScreenSleep from '@/components/ScreenSleep.vue'
+import LockedScreen from '@/components/LockedScreen.vue'
 import { useStatusesStore } from '@/stores/statuses.js'
 import { useSettingsStore } from '@/stores/settings'
 import { computed, ref, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 
 const statusStore = useStatusesStore()
-const { isMenuShown } = storeToRefs(statusStore)
+const { isMenuShown, isUnlocked } = storeToRefs(statusStore)
 
 onMounted(() => {
   statusStore.startScreenSaverTimer()
@@ -76,7 +77,7 @@ function hideLaunchWindow() {
     :style="{ filter: `brightness(${brightness}%)` }"
     @mousemove="statusStore.restartScreenSaverTimer()"
   >
-    <div @click="hideLaunchWindow" class="appsDiv">
+    <div @click="hideLaunchWindow" class="appsDiv" :class="{ 'appsDiv--hidden': !isUnlocked }">
       <BaseAppLauncher
         v-for="app in appsIcons"
         :key="app.title"
@@ -85,7 +86,7 @@ function hideLaunchWindow() {
         :image-alt="app.imageAlt"
       />
     </div>
-    <div class="navbar">
+    <div class="navbar" :class="{ 'navbar--hidden': !isUnlocked }">
       <div class="navbar__left">
         <button @click="onLaunchClick" class="navbar__launch-button">
           <img class="fireTR-icon" :src="firetrLogo" alt="" height="80%" />
@@ -98,5 +99,32 @@ function hideLaunchWindow() {
     <LaunchWindow id="launchwindow" />
     <RouterView />
     <ScreenSleep v-if="screenSaver" />
+    <LockedScreen v-if="!isUnlocked" />
   </div>
 </template>
+
+<style>
+.navbar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transition: 0.5s;
+}
+
+.appsDiv {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  transition: 0.5s;
+}
+
+.navbar--hidden {
+  bottom: -50px;
+}
+
+.appsDiv--hidden {
+  left: -100px;
+}
+</style>

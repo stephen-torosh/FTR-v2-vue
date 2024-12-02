@@ -3,7 +3,13 @@ import { useSettingsStore } from './settings'
 
 export const useStatusesStore = defineStore('statuses', {
   state: () => {
-    return { isMenuShown: false, timer: null, isScreenSaverOn: false }
+    return {
+      isMenuShown: false,
+      timer: null,
+      isScreenSaverOn: false,
+      isUnlocked: false,
+      isPasswordCorrect: true
+    }
   },
   actions: {
     switchMenuStatus(status = true) {
@@ -24,6 +30,16 @@ export const useStatusesStore = defineStore('statuses', {
       clearTimeout(this.timer)
       this.startScreenSaverTimer()
       settingsStore.screenSaver = false
+    },
+    unlockScreen(passwordInput) {
+      const settingsStore = useSettingsStore()
+      const { password } = settingsStore
+      console.log(passwordInput)
+      if (password === passwordInput) {
+        this.isUnlocked = true
+      } else {
+        this.isPasswordCorrect = false
+      }
     }
   }
 })

@@ -1,27 +1,28 @@
 <script setup>
+import SettingsPanel from './settings/SettingsPanel.vue'
+import SettingsDisplay from './settings/SettingsDisplay.vue'
+import SettingsProfile from './settings/SettingsProfile.vue'
+import SettingsSecurity from './settings/SettingsSecurity.vue'
 import { useSettingsStore } from '@/stores/settings.js'
-import { useStatusesStore } from '@/stores/statuses.js'
+import { onUnmounted } from 'vue'
 import { storeToRefs } from 'pinia'
 
 const settingsStore = useSettingsStore()
-const statusesStore = useStatusesStore()
-const { brightness, brightnessValue } = storeToRefs(settingsStore)
-const { isScreenSaverOn } = storeToRefs(statusesStore)
+
+const { activeSetting } = storeToRefs(settingsStore)
+
+onUnmounted(() => {
+  activeSetting.value = 'profile'
+})
 </script>
 
 <template>
-  <div>
-    <div class="centered" style="font-size: x-large">Settings</div>
-    <div class="centered">Brightness: {{ brightnessValue }}</div>
-    <div style="display: flex; justify-content: center">
-      <input type="range" v-model="brightness" min="20" max="120" step="1" />
-    </div>
-    <div class="centered reset-button">
-      <button @click="settingsStore.resetSettings()">reset settings</button>
-    </div>
-    <div class="centered">
-      Screen Saver:
-      <input type="checkbox" name="" id="" v-model="isScreenSaverOn" />
+  <div class="wrapper">
+    <SettingsPanel />
+    <div style="width: 100%">
+      <SettingsDisplay v-if="activeSetting === 'display'" />
+      <SettingsProfile v-if="activeSetting === 'profile'" />
+      <SettingsSecurity v-if="activeSetting === 'security'" />
     </div>
   </div>
 </template>
@@ -31,25 +32,8 @@ div {
   font-family: Caveat;
 }
 
-.centered {
+.wrapper {
   display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
-}
-
-.reset-button {
-  margin-top: 50px;
-}
-
-.reset-button button {
-  border: 2px black solid;
-  padding: 5px 15px;
-  background-color: rgb(133, 133, 133);
-  color: white;
-}
-
-.reset-button button:hover {
-  background-color: rgb(210, 210, 210);
-  color: black;
+  height: 100%;
 }
 </style>

@@ -90,6 +90,7 @@ const statusStore = useStatusesStore()
   bottom: 0;
   left: 0;
   right: 0;
+  color: white;
 }
 
 .cube-hours,

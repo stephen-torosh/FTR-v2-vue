@@ -1,9 +1,20 @@
 <script setup>
+import { computed } from 'vue'
 import { useStatusesStore } from '@/stores/statuses'
 import { storeToRefs } from 'pinia'
+import { useSettingsStore } from '@/stores/settings'
+import DefaultUserIcon from '@/assets/images/default-user.jpg'
+
+const settingsStore = useSettingsStore()
+const { username, userAvatar } = storeToRefs(settingsStore)
 
 const statusStore = useStatusesStore()
 const { isMenuShown } = storeToRefs(statusStore)
+
+const avatar = computed(() => {
+  console.log(userAvatar.value)
+  return userAvatar.value === '' ? DefaultUserIcon : userAvatar.value
+})
 </script>
 
 <template>
@@ -15,8 +26,9 @@ const { isMenuShown } = storeToRefs(statusStore)
     </div>
     <div class="down">
       <div style="display: flex; align-items: center">
-        <img src="../assets/images/default-user.png" alt="" width="32" height="32" />
-        <h4>default user</h4>
+        <div>{{ userAvatar }}</div>
+        <img :src="avatar" alt="" width="24" height="24" />
+        <h4>{{ username }}</h4>
       </div>
       <div style="display: flex; align-items: center">
         <img src="../assets/images/on-off-button.png" alt="" width="20" height="20" />
@@ -38,12 +50,16 @@ const { isMenuShown } = storeToRefs(statusStore)
 
 * {
   font-family: caveat;
-  color: white;
 }
 
 .down {
   display: flex;
   justify-content: space-between;
+
+  img {
+    border-radius: 50%;
+    margin: 4px;
+  }
 }
 
 .launch-window {
@@ -58,6 +74,7 @@ const { isMenuShown } = storeToRefs(statusStore)
   padding: 20px;
   z-index: 2;
   transition: 0.15s;
+  color: white;
 }
 
 .launch-window-wrapper {

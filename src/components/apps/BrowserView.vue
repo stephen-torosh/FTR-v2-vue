@@ -14,7 +14,7 @@ console.log(webpage)
   </div>
 </template>
 
-<style>
+<style scoped>
 input {
   height: 70%;
   width: 50%;
