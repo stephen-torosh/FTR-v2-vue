@@ -8,14 +8,16 @@ FireTR-v2 is still in developing, so there isn`t much information
 
 `https://nodejs.org/en`
 
-## Install Vue framework
+## Install all needed modules for the project
 
-`npm install -g @vue/cli`
-or
-`yarn global add @vue/cli`
+`npm install`
 
 ## Run command -
 
 `npm run dev`
 
-## You can open it now! Enjoy
+## Open localhost - 
+
+`http://127.0.0.1:5000/`
+
+# Now enjoy!
