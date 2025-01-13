@@ -9,7 +9,7 @@ let prevResult = 0
 let lastAction = ''
 
 function buttonclicked(key) {
-  console.log(Number(key))
+
 
   if (Number(key) >= 0 || key === '.') {
     calculatorSTR.value = lastAction === '=' ? key : calculatorSTR.value + key
@@ -24,34 +24,34 @@ function buttonclicked(key) {
     prevResult = plus(prevResult, Number(calculatorSTR.value))
     lastAction = '+'
     calculatorSTR.value = ''
-    console.log(prevResult)
+
   } else if (key === '-') {
     prevResult = prevResult
       ? minus(prevResult, Number(calculatorSTR.value))
       : (prevResult = Number(calculatorSTR.value))
     lastAction = '-'
     calculatorSTR.value = ''
-    console.log(prevResult)
+
   } else if (key === '*') {
     prevResult = prevResult
       ? multiply(prevResult, Number(calculatorSTR.value))
       : (prevResult = Number(calculatorSTR.value))
     lastAction = '*'
     calculatorSTR.value = ''
-    console.log(prevResult)
+
   } else if (key === '/') {
     prevResult = prevResult
       ? divide(prevResult, Number(calculatorSTR.value))
       : (prevResult = Number(calculatorSTR.value))
     lastAction = '/'
     calculatorSTR.value = ''
-    console.log(prevResult)
+
   } else if (key === '=') {
     calculatorSTR.value = doTheLastAction(lastAction, prevResult, Number(calculatorSTR.value))
-    console.log(calculatorSTR.value)
+
     prevResult = 0
     lastAction = '='
-    console.log(prevResult)
+
   }
 }
 </script>

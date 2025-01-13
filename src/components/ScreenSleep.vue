@@ -34,17 +34,13 @@ setInterval(() => {
   const currentdate = new Date()
 
   if (currentdate.getSeconds() == 59) {
-    console.log('check minutes')
     if (currentdate.getMinutes() == 59) {
-      console.log('rotate both')
       isMinutesRotate.value = true
       isHoursRotate.value = true
     } else {
-      console.log('rotate minutes')
       isMinutesRotate.value = true
     }
     setTimeout(() => {
-      console.log('clear')
       isMinutesRotate.value = false
       isHoursRotate.value = false
     }, 2000)

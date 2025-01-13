@@ -49,6 +49,10 @@ h1 {
   color: white;
 }
 
+input {
+  font-family: ;
+}
+
 .wrapper {
   display: flex;
   justify-content: center;

@@ -7,7 +7,7 @@ export const useStatusesStore = defineStore('statuses', {
       isMenuShown: false,
       timer: null,
       isScreenSaverOn: false,
-      isUnlocked: false,
+      isUnlocked: true,
       isPasswordCorrect: true
     }
   },
@@ -16,11 +16,9 @@ export const useStatusesStore = defineStore('statuses', {
       this.isMenuShown = status
     },
     startScreenSaverTimer() {
-      console.log(this.isScreenSaverOn)
       if (!this.isScreenSaverOn) return
       const settingsStore = useSettingsStore()
       let screenSaverTimer = () => {
-        console.log('timer out')
         settingsStore.screenSaver = true
       }
       this.timer = setTimeout(screenSaverTimer, 3000)
@@ -34,7 +32,7 @@ export const useStatusesStore = defineStore('statuses', {
     unlockScreen(passwordInput) {
       const settingsStore = useSettingsStore()
       const { password } = settingsStore
-      console.log(passwordInput)
+
       if (password === passwordInput) {
         this.isUnlocked = true
       } else {

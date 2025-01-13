@@ -12,7 +12,6 @@ const statusStore = useStatusesStore()
 const { isMenuShown } = storeToRefs(statusStore)
 
 const avatar = computed(() => {
-  console.log(userAvatar.value)
   return userAvatar.value === '' ? DefaultUserIcon : userAvatar.value
 })
 </script>
@@ -26,7 +25,6 @@ const avatar = computed(() => {
     </div>
     <div class="down">
       <div style="display: flex; align-items: center">
-        <div>{{ userAvatar }}</div>
         <img :src="avatar" alt="" width="24" height="24" />
         <h4>{{ username }}</h4>
       </div>

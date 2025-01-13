@@ -1,46 +1,6 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 
-// function createNewPrompt() {
-//   document.getElementById('terminal').innerHTML += `<div
-//       class="prompt"
-//       style="
-//         display: flex;
-//         font-family:
-//           system-ui,
-//           -apple-system,
-//           BlinkMacSystemFont,
-//           'Segoe UI',
-//           Roboto,
-//           Oxygen,
-//           Ubuntu,
-//           Cantarell,
-//           'Open Sans',
-//           'Helvetica Neue',
-//           sans-serif;
-//         color: white;
-//       "
-//     >
-//       FTR:
-//     </div>`
-// }
-
-// document.addEventListener('keydown', () => {
-//   if (event.key[0] == 'B') {
-//     document.getElementsByClassName('prompt')[
-//       document.getElementsByClassName('prompt').length - 1
-//     ].innerHTML = document
-//       .getElementsByClassName('prompt')
-//       [document.getElementsByClassName('prompt').length - 1].innerHTML.slice(0, -1)
-//   } else if (event.key[0] == 'E') {
-//     createNewPrompt()
-//   } else if (event.key[0] != 'B' || event.key[0] != 'E') {
-//     document.getElementsByClassName('prompt')[
-//       document.getElementsByClassName('prompt').length - 1
-//     ].innerHTML += event.key[0]
-//   }
-// })
-
 const prompt = ref('')
 const commands = ref([])
 const input = ref(null)
@@ -49,10 +9,17 @@ onMounted(() => {
   input.value.focus()
 })
 
-function ftrenter() {
-  commands.value.push(prompt.value)
-  console.log('123')
-  prompt.value = ''
+async function ftrenter() {
+  try {
+    const response = await fetch('http://127.0.0.1:5000/terminal/ls')
+    const html = await response.text()
+    commands.value.push({ command: prompt.value, html: html })
+    console.log(html)
+
+    prompt.value = ''
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 function returnFocus(event) {
@@ -83,8 +50,12 @@ function returnFocus(event) {
         color: white;
       "
     >
-      FTR:{{ prompt }}
+      <div>
+        FTR:{{ prompt.command }}
+        <div>{{ prompt.html }}</div>
+      </div>
     </div>
+
     <div
       style="
         display: flex;

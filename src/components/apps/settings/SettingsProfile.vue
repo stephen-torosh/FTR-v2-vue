@@ -14,7 +14,6 @@ const imageFile = ref(null)
 const isEditShowed = ref(true)
 
 const avatar = computed(() => {
-  console.log(userAvatar.value)
   return userAvatar.value === '' ? DefaultUserIcon : userAvatar.value
 })
 
@@ -23,7 +22,7 @@ function switchEditMode() {
 
   if (isEditShowed.value) {
     saveUsername(usernameLocal.value)
-    updateAvatar(imageFile)
+    updateAvatar(imageFile.value)
   }
 }
 

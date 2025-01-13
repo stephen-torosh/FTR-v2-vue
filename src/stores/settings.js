@@ -21,16 +21,15 @@ export const useSettingsStore = defineStore('settings', {
     },
     setActiveSetting(settingName) {
       this.activeSetting = settingName.toLowerCase()
-      console.log(settingName)
     },
     saveUsername(username) {
       this.username = username
     },
-    updateAvatar(URLL) {
-      // this.userAvatar = URLL
-      // console.log(URL.createObjectURL(URLL))
-      const image = URL.createObjectURL(URLL)
-      console.log(image)
+    updateAvatar(file) {
+      this.userAvatar = file
+    },
+    changePassword(password) {
+      this.password = password
     }
   },
   getters: {

@@ -67,7 +67,7 @@ const fullTime = computed(
 
 function hideLaunchWindow() {
   statusStore.switchMenuStatus(false)
-  console.log('hideLaunchWindow')
+
 }
 </script>
 
@@ -117,6 +117,7 @@ function hideLaunchWindow() {
   bottom: 0;
   top: 0;
   left: 0;
+  right: 0;
   transition: 0.5s;
 }
 

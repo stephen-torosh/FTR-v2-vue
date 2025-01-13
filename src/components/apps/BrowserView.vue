@@ -1,7 +1,7 @@
 <script>
 const webpage = document.getElementById('webpage')
 
-console.log(webpage)
+
 </script>
 
 <template>
