@@ -34,7 +34,8 @@ FireTR-v2 is still in developing, so there isn`t much information
 
 `npm install`
 
-![Знімок екрана (3)](https://github.com/user-attachments/assets/59d9536f-ed6e-486a-a991-64e09378c949)
+![image](https://github.com/user-attachments/assets/5b0c3050-676c-417f-ae0b-4d7228a3b00b)
+
 
 ## Then run this command if the installation was successful
 
