@@ -4,14 +4,15 @@ import { onMounted, ref } from 'vue'
 const prompt = ref('')
 const commands = ref([])
 const input = ref(null)
+const followBlock = ref()
 
 onMounted(() => {
   input.value.focus()
 })
 
-async function ftrenter() {
+async function sendData() {
   try {
-    const response = await fetch('http://127.0.0.1:5000/terminal/ls')
+    const response = await fetch('http://127.0.0.1:5000/terminal/ls%20..~')
     const html = await response.text()
     commands.value.push({ command: prompt.value, html: html })
     console.log(html)
@@ -22,6 +23,14 @@ async function ftrenter() {
   }
 }
 
+function ftrenter() {
+  sendData().then(() => {
+    followBlock.value.scrollIntoView({
+      behavior: 'smooth'
+    })
+  })
+}
+
 function returnFocus(event) {
   event.target.focus()
 }
@@ -29,90 +38,44 @@ function returnFocus(event) {
 
 <template>
   <div id="terminal">
-    <div
-      class="prompt"
-      v-for="(prompt, index) in commands"
-      :key="index"
-      style="
-        display: flex;
-        font-family:
-          system-ui,
-          -apple-system,
-          BlinkMacSystemFont,
-          'Segoe UI',
-          Roboto,
-          Oxygen,
-          Ubuntu,
-          Cantarell,
-          'Open Sans',
-          'Helvetica Neue',
-          sans-serif;
-        color: white;
-      "
-    >
+    <div class="prompt" v-for="(prompt, index) in commands" :key="index" style="display: flex">
       <div>
         FTR:{{ prompt.command }}
-        <div>{{ prompt.html }}</div>
+        <div style="font-family: system-ui, sans-serif" v-html="prompt.html" />
       </div>
     </div>
 
-    <div
-      style="
-        display: flex;
-        font-family:
-          system-ui,
-          -apple-system,
-          BlinkMacSystemFont,
-          'Segoe UI',
-          Roboto,
-          Oxygen,
-          Ubuntu,
-          Cantarell,
-          'Open Sans',
-          'Helvetica Neue',
-          sans-serif;
-        color: white;
-      "
-    >
+    <div class="prompt">
       FTR:
-      <input
-        type="text"
-        v-model="prompt"
-        @keyup.enter="ftrenter"
-        @blur="returnFocus"
-        ref="input"
-        style="
-          background-color: rgb(41, 41, 41);
-          color: white;
-          text-decoration: none;
-          font-family:
-            system-ui,
-            -apple-system,
-            BlinkMacSystemFont,
-            'Segoe UI',
-            Roboto,
-            Oxygen,
-            Ubuntu,
-            Cantarell,
-            'Open Sans',
-            'Helvetica Neue',
-            sans-serif;
-          font-size: medium;
-          width: 100%;
-          border: 0;
-        "
-      />
+      <input type="text" v-model="prompt" @keyup.enter="ftrenter" @blur="returnFocus" ref="input" />
     </div>
+    <div ref="followBlock"></div>
   </div>
 </template>
 
 <style scoped>
-/* .prompt {
-} */
+* {
+  font-family: system-ui, sans-serif;
+  color: white;
+}
 #terminal {
   background-color: rgb(41, 41, 41);
   width: 100%;
   height: 100%;
   padding: 5px;
+  overflow-y: scroll;
+}
+input {
+  background-color: rgb(41, 41, 41);
+  color: white;
+  text-decoration: none;
+  font-size: medium;
+  width: 100%;
+  border: 0;
+}
+
+.prompt {
+  display: flex;
+  font-family: system-ui, sans-serif;
 }
 </style>

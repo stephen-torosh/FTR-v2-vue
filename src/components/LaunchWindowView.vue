@@ -46,7 +46,7 @@ const avatar = computed(() => {
 //   height: calc(100vh - 50px);
 // }
 
-* {
+body {
   font-family: caveat;
 }
 
