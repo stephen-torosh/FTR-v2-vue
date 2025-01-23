@@ -9,8 +9,6 @@ let prevResult = 0
 let lastAction = ''
 
 function buttonclicked(key) {
-
-
   if (Number(key) >= 0 || key === '.') {
     calculatorSTR.value = lastAction === '=' ? key : calculatorSTR.value + key
     lastAction = lastAction === '=' ? 'number' : lastAction
@@ -24,34 +22,29 @@ function buttonclicked(key) {
     prevResult = plus(prevResult, Number(calculatorSTR.value))
     lastAction = '+'
     calculatorSTR.value = ''
-
   } else if (key === '-') {
     prevResult = prevResult
       ? minus(prevResult, Number(calculatorSTR.value))
       : (prevResult = Number(calculatorSTR.value))
     lastAction = '-'
     calculatorSTR.value = ''
-
   } else if (key === '*') {
     prevResult = prevResult
       ? multiply(prevResult, Number(calculatorSTR.value))
       : (prevResult = Number(calculatorSTR.value))
     lastAction = '*'
     calculatorSTR.value = ''
-
   } else if (key === '/') {
     prevResult = prevResult
       ? divide(prevResult, Number(calculatorSTR.value))
       : (prevResult = Number(calculatorSTR.value))
     lastAction = '/'
     calculatorSTR.value = ''
-
   } else if (key === '=') {
     calculatorSTR.value = doTheLastAction(lastAction, prevResult, Number(calculatorSTR.value))
 
     prevResult = 0
     lastAction = '='
-
   }
 }
 </script>
@@ -101,6 +94,7 @@ function buttonclicked(key) {
     height: 80px;
     font-size: 30px;
     transition: 0.5s;
+    font-family: caveat;
   }
 
   &__buttons:hover {

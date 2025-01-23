@@ -1,7 +1,5 @@
 <script>
 const webpage = document.getElementById('webpage')
-
-
 </script>
 
 <template>

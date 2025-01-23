@@ -35,6 +35,7 @@ const { isScreenSaverOn } = storeToRefs(statusesStore)
   padding: 5px 15px;
   background-color: rgb(133, 133, 133);
   color: white;
+  font-family: caveat;
 }
 
 .reset-button button:hover {

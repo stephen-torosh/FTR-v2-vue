@@ -62,6 +62,7 @@ function getImage($event) {
   font-size: 40px;
   background-color: transparent;
   text-align: center;
+  font-family: caveat;
 }
 
 .edit-button,
@@ -72,6 +73,7 @@ function getImage($event) {
   height: 30px;
   border-radius: 5px;
   font-size: 20px;
+  font-family: caveat;
 }
 
 .profile-image input {

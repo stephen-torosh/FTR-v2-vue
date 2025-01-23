@@ -70,7 +70,7 @@ function changepass() {
       />
     </label>
     <label for=""> Show Password <input type="checkbox" v-model="showpass" /></label>
-    <button type="submit">Change Password</button>
+    <button class="buttonsub" type="submit">Change Password</button>
   </form>
   <p class="errormessage">{{ errormessage }}</p>
   <p class="successmessage" v-if="isSuccess">Password changed Successfully!</p>
@@ -86,6 +86,10 @@ function changepass() {
 .changepass {
   text-align: center;
   margin-bottom: 5px;
+}
+
+.buttonsub {
+  font-family: caveat;
 }
 
 input {

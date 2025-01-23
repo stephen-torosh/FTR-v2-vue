@@ -50,7 +50,7 @@ h1 {
 }
 
 input {
-  font-family: ;
+  font-family:;
 }
 
 .wrapper {

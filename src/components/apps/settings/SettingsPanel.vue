@@ -61,6 +61,7 @@ aside {
 }
 
 .item {
+  font-family: caveat;
   &__text {
     line-height: 30px;
   }
