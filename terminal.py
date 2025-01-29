@@ -29,18 +29,21 @@ def ls(path):
         files = os.listdir(path)
         files.sort()
         for f in files:
-            answer += f"<div>{f}</div>"
+            if (os.path.isfile(f)):
+                answer += f"<div style='color: red;'>{f}</div>"
+            else:
+                 answer += f"<div style='color: blue;'>{f}</div>"
         return answer
     else:
-       return "-> FTR: directory not found"
+       return "<span style='color: red;'>-> FTR: directory not found</span>"
 
 
 def cd(path):
     try:
         os.chdir(path)
-        return "-> FTR: Current directory successfully defined"
+        return "<span style='color: LimeGreen;'>-> FTR: Current directory successfully defined</span>"
     except:
-        return "-> FTR: Current directory does not exists"
+        return "<span style='color: red;'>-> FTR: Current directory does not exists</span>"
 
 # commands for directories
 
@@ -48,23 +51,23 @@ def cd(path):
 def mkdir(path):
     try:
         os.mkdir(path)
-        return f"-> FTR: Directory '{path}' successfully created"
+        return f"<span style='color: LimeGreen;'>-> FTR: Directory '{path}' successfully created</span>"
     except FileExistsError as error:
-        return f"-> FTR: failed to create directory"
+        return f"<span style='color: red;'>-> FTR: failed to create directory</span"
 
 
 def rmdir(path):
     if os.path.isdir(path):
         if os.listdir(path) != []:
-            return "Sorry, but directory is not empty, use rmf and rmdir commands to delete files and directories"
+            return "<span style='color: red;'>Sorry, but directory is not empty, use rmf and rmdir commands to delete files and directories</span>"
         else:
             if os.path.isdir(path):
                 os.rmdir(path)
-                return f"-> FTR: Directory '{path}' successfully removed"
+                return f"<span style='color: LimeGreen;'>-> FTR: Directory '{path}' successfully removed</span>"
             else:
-                return "-> FTR: directory not found"
+                return "<span style='color: red;'>-> FTR: directory not found</span>"
     else:
-        return f"Sorry, but '{path}' is not a directory"
+        return f"<span style='color: red;'>Sorry, but '{path}' is not a directory</span>"
 
 # commands for files
 
@@ -75,9 +78,9 @@ def rmf(filePath):
     else:
         try:
             os.remove(filePath)
-            return f"-> FTR: File '{filePath}' successfully removed"
+            return f"<span style='color: LimeGreen;'>-> FTR: File '{filePath}' successfully removed</span>"
         except FileExistsError as error:
-            return "-> FTR: file not found"
+            return "<span style='color: red;'>-> FTR: file not found</span>"
 
 
 def genpass(length: int = 0):
@@ -86,7 +89,7 @@ def genpass(length: int = 0):
     lengthRange = range(random.randint(8, 32))
     if (length > 0):
         if (length > 128):
-            return "Sorry, but password length can not be more than 128"
+            return "<span style='color: red;'>Sorry, but password length can not be more than 128</span>"
         lengthRange = range(length)
     for i in lengthRange:
         password = password + chars[random.randint(0, 72)]
@@ -97,15 +100,18 @@ def cat(path):
     if os.path.isfile(path):
         with open(path) as f:
             contents = f.read()
-            return contents
+            returncontents = ""
+            for c in contents:
+                returncontents += f"<div>{c}</div>"
+            return returncontents
     else:
-        return "-> FTR: file not found"
+        return "<span style='color: red;'>-> FTR: file not found</span>"
 
 
 def createFile(filePath, textLine):
     with open(filePath, "w") as f:
         f.write(textLine)
-    return f"-> FTR: File '{filePath}' successfully created"
+    return f"<span style='color: LimeGreen;'>-> FTR: File '{filePath}' successfully created</span>"
 
 
 def listCommands():
