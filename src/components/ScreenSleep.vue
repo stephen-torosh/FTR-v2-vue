@@ -81,7 +81,7 @@ const statusStore = useStatusesStore()
 <style scoped>
 .main {
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.8);
   top: 0;
   bottom: 0;
   left: 0;
