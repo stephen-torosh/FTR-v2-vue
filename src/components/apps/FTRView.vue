@@ -12,11 +12,12 @@ onMounted(() => {
 
 async function sendData() {
   try {
-    const response = await fetch('http://127.0.0.1:5000/terminal/ls%20..~')
-    const html = await response.text()
-    commands.value.push({ command: prompt.value, html: html })
-    console.log(html)
-
+    const formattedInput = prompt.value.replace(' ', '%20').replace('/', '~')
+    if (formattedInput) {
+      const response = await fetch(`http://127.0.0.1:5000/terminal/${formattedInput}`)
+      const html = await response.text()
+      commands.value.push({ command: prompt.value, html: html })
+    }
     prompt.value = ''
   } catch (error) {
     console.log(error)

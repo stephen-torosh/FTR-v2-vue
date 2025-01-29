@@ -76,7 +76,11 @@ function hideLaunchWindow() {
     :style="{ filter: `brightness(${brightness}%)` }"
     @mousemove="statusStore.restartScreenSaverTimer()"
   >
-    <div @click="hideLaunchWindow" class="appsDiv" :class="{ 'appsDiv--hidden': !isUnlocked }">
+    <div
+      @click="hideLaunchWindow"
+      class="appsDiv"
+      :class="{ 'appsDiv--hidden': !isUnlocked || screenSaver }"
+    >
       <BaseAppLauncher
         v-for="app in appsIcons"
         :key="app.title"
@@ -85,7 +89,7 @@ function hideLaunchWindow() {
         :image-alt="app.imageAlt"
       />
     </div>
-    <div class="navbar" :class="{ 'navbar--hidden': !isUnlocked }">
+    <div class="navbar" :class="{ 'navbar--hidden': !isUnlocked || screenSaver }">
       <div class="navbar__left">
         <button @click="onLaunchClick" class="navbar__launch-button">
           <img class="fireTR-icon" :src="firetrLogo" alt="" height="80%" />
