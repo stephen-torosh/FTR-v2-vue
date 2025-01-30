@@ -10,7 +10,7 @@ export const useSettingsStore = defineStore('settings', {
       username: 'Default User',
       userAvatar: '',
       password: 'default',
-      screenSaverStyle: 1
+      screenSaverStyle: 1,
     }
   },
   actions: {
