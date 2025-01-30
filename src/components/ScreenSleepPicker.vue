@@ -32,7 +32,11 @@ function optionSub() {
 
 function saveChanges() {
   screenSaverStyle.value = option.value
-  screenSaverStyle.value = false
+  screenSaverStyler.value = false
+}
+
+function discardChanges() {
+  screenSaverStyler.value = false
 }
 
 document.onkeydown = (e) => {
@@ -90,13 +94,14 @@ let screenSleepOption6 = computed(() => {
     <div class="item" :class="{ 'item__active': option==6 }"></div>
   </div>
 
-  <button>Save changes</button>
+  <button class="save" @click="saveChanges()">Save changes</button>
+  <button class="discard" @click="discardChanges()">Discard changes</button>
 </template>
 
 <style scoped>
 .main2 {
   position: absolute;
-  background-image: url("../assets/images/bg.png");
+  background-image: url("../assets/images/bg3.png");
   background-size: cover;
   width: 100%;
   height: 100%;
@@ -114,7 +119,7 @@ let screenSleepOption6 = computed(() => {
   z-index: 2000;
 }
 
-button {
+.save {
   position: absolute;
   width: 100px;
   height: 40px;
@@ -124,6 +129,19 @@ button {
   border: 0;
   border-radius: 10px;
   background-color: rgb(36, 91, 255);
+  color: white;
+}
+
+.discard {
+  position: absolute;
+  width: 100px;
+  height: 40px;
+  top: 20px;
+  left: calc(100% - 50px);
+  transform: translate(-170%,-50%);
+  border: 0;
+  border-radius: 10px;
+  background-color: rgb(170, 170, 170);
   color: white;
 }
 

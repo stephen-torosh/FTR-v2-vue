@@ -6,7 +6,12 @@ import { storeToRefs } from 'pinia'
 const settingsStore = useSettingsStore()
 const statusesStore = useStatusesStore()
 const { brightness, brightnessValue } = storeToRefs(settingsStore)
-const { isScreenSaverOn } = storeToRefs(statusesStore)
+const { isScreenSaverOn,screenSaverStyler } = storeToRefs(statusesStore)
+
+function screenSaverStylerOn() {
+  screenSaverStyler.value = true
+}
+
 </script>
 
 <template>
@@ -19,6 +24,9 @@ const { isScreenSaverOn } = storeToRefs(statusesStore)
     Screen Saver:
     <input type="checkbox" name="" id="" v-model="isScreenSaverOn" />
   </div>
+  <div class="centered">
+    <button @click="screenSaverStylerOn()" class="ScreenSleeper-button">Change Screen Saver Style</button>
+  </div>
   <!---->
   <div class="centered reset-button">
     <button @click="settingsStore.resetSettings()">reset settings</button>
@@ -30,6 +38,15 @@ const { isScreenSaverOn } = storeToRefs(statusesStore)
   margin-top: 50px;
 }
 
+.ScreenSleeper-button {
+  border: 2px black solid;
+  padding: 5px 15px;
+  background-color: rgb(133, 133, 133);
+  color: white;
+  font-family: caveat;
+  margin-top: 10px;
+}
+
 .reset-button button {
   border: 2px black solid;
   padding: 5px 15px;
@@ -39,6 +56,11 @@ const { isScreenSaverOn } = storeToRefs(statusesStore)
 }
 
 .reset-button button:hover {
+  background-color: rgb(210, 210, 210);
+  color: black;
+}
+
+.ScreenSleeper-button:hover {
   background-color: rgb(210, 210, 210);
   color: black;
 }

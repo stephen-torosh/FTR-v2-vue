@@ -75,6 +75,7 @@ function hideLaunchWindow() {
   <div
     id="desktop"
     :style="{ filter: `brightness(${brightness}%)` }"
+    :class="{ 'nocursor': screenSaver }"
     @mousemove="statusStore.restartScreenSaverTimer()"
   >
     <div
@@ -115,6 +116,10 @@ function hideLaunchWindow() {
   left: 0;
   right: 0;
   transition: 0.5s;
+}
+
+.nocursor {
+  cursor: none;
 }
 
 .appsDiv {
