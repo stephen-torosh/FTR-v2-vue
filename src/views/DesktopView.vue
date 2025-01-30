@@ -12,6 +12,7 @@ import { useStatusesStore } from '@/stores/statuses.js'
 import { useSettingsStore } from '@/stores/settings'
 import { computed, ref, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
+import ScreenSleepPicker from '@/components/ScreenSleepPicker.vue'
 
 const statusStore = useStatusesStore()
 const { isMenuShown, isUnlocked } = storeToRefs(statusStore)
@@ -103,6 +104,7 @@ function hideLaunchWindow() {
     <RouterView />
     <ScreenSleep v-if="screenSaver" />
     <LockedScreen v-if="!isUnlocked" />
+    <ScreenSleepPicker />
   </div>
 </template>
 

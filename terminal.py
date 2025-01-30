@@ -96,16 +96,16 @@ def genpass(length: int = 0):
     return password
 
 
-def cat(path):
-    if os.path.isfile(path):
-        with open(path) as f:
-            contents = f.read()
-            returncontents = ""
-            for c in contents:
-                returncontents += f"<div>{c}</div>"
-            return returncontents
-    else:
-        return "<span style='color: red;'>-> FTR: file not found</span>"
+# def cat(path):
+#     if os.path.isfile(path):
+#         with open(path, "r") as file:
+#             contents = ""
+#             for i in file:
+#                 contents += f"<div>{i}</div>"
+
+#             return contents
+#     else:
+#         return "<span style='color: red;'>-> FTR: file not found</span>"
 
 
 def createFile(filePath, textLine):
@@ -165,11 +165,11 @@ def command(value):
                     return rmf(' '.join(arguments[1:]))
             case "cwd":
                 return os.getcwd()
-            case "cat":
-                if (lenOfValueList == 1):
-                    return "Please, enter name of file: cat <name of file>"
-                if (lenOfValueList == 2):
-                    return cat(' '.join(arguments[1:]))
+            # case "cat":
+            #     if (lenOfValueList == 1):
+            #         return "Please, enter name of file: cat <name of file>"
+            #     if (lenOfValueList == 2):
+            #         return cat(' '.join(arguments[1:]))
             case "version":
                 return "FTR: version: 1.2 official"
             case "help":

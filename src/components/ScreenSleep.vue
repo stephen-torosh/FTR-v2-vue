@@ -1,130 +1,43 @@
 <script setup>
-import { useStatusesStore } from '@/stores/statuses'
-import { computed, ref } from 'vue'
+import ScreenSleep_downerleft from './ScreenSleep/ScreenSleep_downerleft.vue'
+import ScreenSleep_downerright from './ScreenSleep/ScreenSleep_downerright.vue'
+import ScreenSleep_downercenter from './ScreenSleep/ScreenSleep_downercenter.vue'
 
-const date = ref(new Date())
+import ScreenSleep_upperleft from './ScreenSleep/ScreenSleep_upperleft.vue'
+import ScreenSleep_upperright from './ScreenSleep/ScreenSleep_upperright.vue'
+import ScreenSleep_uppercenter from './ScreenSleep/ScreenSleep_uppercenter.vue'
 
-const WeekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+import { useSettingsStore } from '@/stores/settings'
+import { ref } from 'vue'
+import { storeToRefs } from 'pinia'
 
-const YearMonths = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December'
-]
+const { screenSaverStyle } = storeToRefs(useSettingsStore())
 
-const fullDate = computed(
-  () =>
-    `${WeekDays[parseInt(date.value.getDay()) - 1]} - ${date.value.getDate()} ${YearMonths[parseInt(date.value.getMonth())]}`
-)
+const screensleep1 = ref(false)
+const screensleep2 = ref(false)
+const screensleep3 = ref(false)
 
-const isMinutesRotate = ref(false)
-const isHoursRotate = ref(false)
+const screensleep4 = ref(false)
+const screensleep5 = ref(false)
+const screensleep6 = ref(false)
 
-setInterval(() => {
-  date.value = new Date()
-  const currentdate = new Date()
+screensleep1.value = screenSaverStyle.value == 1
+screensleep2.value = screenSaverStyle.value == 2
+screensleep3.value = screenSaverStyle.value == 3
 
-  if (currentdate.getSeconds() == 59) {
-    if (currentdate.getMinutes() == 59) {
-      isMinutesRotate.value = true
-      isHoursRotate.value = true
-    } else {
-      isMinutesRotate.value = true
-    }
-    setTimeout(() => {
-      isMinutesRotate.value = false
-      isHoursRotate.value = false
-    }, 2000)
-  }
-}, 1000)
-
-const minutes = computed(() =>
-  date.value.getMinutes() > 9 ? date.value.getMinutes() : `0${date.value.getMinutes()}`
-)
-
-//date.value.getHours()
-
-const statusStore = useStatusesStore()
-
-// const main = document.getElementsByClassName('main')
-// main.addEventListener('onmousemove', mouseMoved)
+screensleep4.value = screenSaverStyle.value == 4
+screensleep5.value = screenSaverStyle.value == 5
+screensleep6.value = screenSaverStyle.value == 6
 </script>
 
 <template>
-  <div class="main" @mousemove="statusStore.restartScreenSaverTimer()">
-    <div class="scene">
-      <div class="cube-hours">
-        <div class="timesleeperTime" :class="{ 'timesleeperTime-animation': isHoursRotate }">
-          {{ date.getHours() }}
-        </div>
-      </div>
-      :
-      <div class="cube-minutes">
-        <div class="timesleeperTime" :class="{ 'timesleeperTime-animation': isMinutesRotate }">
-          {{ minutes }}
-        </div>
-      </div>
-    </div>
-    <div class="timesleeperDate">{{ fullDate }}</div>
-  </div>
+  <ScreenSleep_downerleft v-if="screensleep1" />
+  <ScreenSleep_downerright v-if="screensleep2" />
+  <ScreenSleep_downercenter v-if="screensleep3" />
+
+  <ScreenSleep_upperleft v-if="screensleep4" />
+  <ScreenSleep_upperright v-if="screensleep5" />
+  <ScreenSleep_uppercenter v-if="screensleep6" />
 </template>
 
-<style scoped>
-.main {
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.8);
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  color: white;
-}
-
-.cube-hours,
-.cube-minutes {
-  perspective: 500px;
-  transform-style: preserve-3d;
-  transform: translateZ(-100px);
-}
-
-.scene {
-  font-size: 7em;
-  display: flex;
-  justify-content: center;
-}
-
-.timesleeperTime {
-  width: 100%;
-  justify-content: center;
-}
-
-.timesleeperTime-animation {
-  animation: clockRotation 2s 1;
-}
-
-.timesleeperDate {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  font-size: 1.5em;
-}
-@keyframes clockRotation {
-  0% {
-    transform: rotateX(0deg);
-    transform: translateZ(-100);
-  }
-  100% {
-    transform: rotateX(360deg);
-    transform: translateZ(-100);
-  }
-}
-</style>
+<style scoped></style>
