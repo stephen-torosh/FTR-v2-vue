@@ -24,6 +24,20 @@ onMounted(() => {
 const settingsStore = useSettingsStore()
 const { brightness, screenSaver } = storeToRefs(settingsStore)
 
+const { backgroundId } = storeToRefs(settingsStore)
+
+const bg1 = computed(() => {
+  return backgroundId.value == 1
+})
+
+const bg2 = computed(() => {
+  return backgroundId.value == 2
+})
+
+const bg3 = computed(() => {
+  return backgroundId.value == 3
+})
+
 const appsIcons = [
   {
     title: 'FTR',
@@ -69,13 +83,14 @@ const fullTime = computed(
 function hideLaunchWindow() {
   statusStore.switchMenuStatus(false)
 }
+
 </script>
 
 <template>
   <div
     id="desktop"
     :style="{ filter: `brightness(${brightness}%)` }"
-    :class="{ 'nocursor': screenSaver }"
+    :class="{ 'nocursor': screenSaver, 'bg1': bg1, 'bg2': bg2, 'bg3': bg3 }"
     @mousemove="statusStore.restartScreenSaverTimer()"
   >
     <div
@@ -116,6 +131,21 @@ function hideLaunchWindow() {
   left: 0;
   right: 0;
   transition: 0.5s;
+}
+
+.bg1 {
+  background-image: url('../assets/images/bg1.png');
+  background-size: cover;
+}
+
+.bg2 {
+  background-image: url('../assets/images/bg2.png');
+  background-size: cover;
+}
+
+.bg3 {
+  background-image: url('../assets/images/bg3.png');
+  background-size: cover;
 }
 
 .nocursor {
