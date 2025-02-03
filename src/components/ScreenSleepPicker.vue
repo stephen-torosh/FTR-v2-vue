@@ -13,7 +13,7 @@ import { useSettingsStore } from '@/stores/settings'
 import { useStatusesStore } from '@/stores/statuses'
 import { storeToRefs } from 'pinia'
 
-const { screenSaverStyle } = storeToRefs(useSettingsStore())
+const { screenSaverStyle, backgroundId } = storeToRefs(useSettingsStore())
 const { screenSaverStyler } = storeToRefs(useStatusesStore())
 
 const option = ref(screenSaverStyle.value)
@@ -48,34 +48,48 @@ document.onkeydown = (e) => {
   }
 };
 
-let screenSleepOption1 = computed(() => {
+const screenSleepOption1 = computed(() => {
   return option.value == 1
 })
 
-let screenSleepOption2 = computed(() => {
+const screenSleepOption2 = computed(() => {
   return option.value == 2
 })
 
-let screenSleepOption3 = computed(() => {
+const screenSleepOption3 = computed(() => {
   return option.value == 3
 })
 
-let screenSleepOption4 = computed(() => {
+const screenSleepOption4 = computed(() => {
   return option.value == 4
 })
 
-let screenSleepOption5 = computed(() => {
+const screenSleepOption5 = computed(() => {
   return option.value == 5
 })
 
-let screenSleepOption6 = computed(() => {
+const screenSleepOption6 = computed(() => {
   return option.value == 6
+})
+
+
+
+const bg1 = computed(() => {
+  return backgroundId.value == 1
+})
+
+const bg2 = computed(() => {
+  return backgroundId.value == 2
+})
+
+const bg3 = computed(() => {
+  return backgroundId.value == 3
 })
 
 </script>
 
 <template>
-  <div class="main2"></div>
+  <div class="main2" :class="{ 'bg1': bg1, 'bg2': bg2, 'bg3': bg3 }"></div>
 
   <ScreenSleep_downerleft v-if="screenSleepOption1" />
   <ScreenSleep_downerright v-if="screenSleepOption2" />
@@ -101,10 +115,21 @@ let screenSleepOption6 = computed(() => {
 <style scoped>
 .main2 {
   position: absolute;
-  background-image: url("../assets/images/bg3.png");
   background-size: cover;
   width: 100%;
   height: 100%;
+}
+
+.bg1 {
+  background-image: url("../assets/images/bg1.png");
+}
+
+.bg2 {
+  background-image: url("../assets/images/bg2.png");
+}
+
+.bg3 {
+  background-image: url("../assets/images/bg3.png");
 }
 
 .optioner {
@@ -134,7 +159,7 @@ let screenSleepOption6 = computed(() => {
 
 .discard {
   position: absolute;
-  width: 100px;
+  width: 110px;
   height: 40px;
   top: 20px;
   left: calc(100% - 50px);
