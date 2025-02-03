@@ -6,7 +6,7 @@ import { computed } from 'vue'
 
 const settingsStore = useSettingsStore()
 const statusesStore = useStatusesStore()
-const { brightness, brightnessValue } = storeToRefs(settingsStore)
+const { brightness, brightnessValue, screensaverdelay } = storeToRefs(settingsStore)
 const { backgroundId, setBackgroundId } = storeToRefs(settingsStore)
 const { isScreenSaverOn,screenSaverStyler } = storeToRefs(statusesStore)
 
@@ -38,6 +38,12 @@ const bg3 = computed(() => {
   <div class="centered">
     Screen Saver:
     <input type="checkbox" name="" id="" v-model="isScreenSaverOn" />
+  </div>
+  <div class="centered">
+    Screen Saver delay: {{ screensaverdelay }}s
+    <div class="centered">
+      <input type="range" v-model="screensaverdelay" min="10" max="50" step="1">
+    </div>
   </div>
   <div class="centered">
     <button @click="screenSaverStylerOn()" class="ScreenSleeper-button">Change Screen Saver Style</button>
