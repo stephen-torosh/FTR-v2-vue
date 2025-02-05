@@ -33,10 +33,6 @@ def ls(path):
                 answer += f"<div style='color: red;'>{f}</div>"
             else:
                  answer += f"<div style='color: blue;'>{f}</div>"
-            if (os.path.isfile(f)):
-                answer += f"<div style='color: red;'>{f}</div>"
-            else:
-                 answer += f"<div style='color: blue;'>{f}</div>"
         return answer
     else:
        return "<span style='color: red;'>-> FTR: directory not found</span>"

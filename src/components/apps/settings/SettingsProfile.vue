@@ -22,7 +22,7 @@ function switchEditMode() {
 
   if (isEditShowed.value) {
     saveUsername(usernameLocal.value)
-    updateAvatar(imageFile.value)
+    !imageFile.value || updateAvatar(imageFile.value)
   }
 }
 

@@ -22,8 +22,7 @@ export const useStatusesStore = defineStore('statuses', {
       let screenSaverTimer = () => {
         settingsStore.screenSaver = true
       }
-      const settingsStore2 = useSettingsStore()
-      this.timer = setTimeout(screenSaverTimer, settingsStore2.screensaverdelay)
+      this.timer = setTimeout(screenSaverTimer, settingsStore.screensaverdelay * 1000)
     },
     restartScreenSaverTimer() {
       const settingsStore = useSettingsStore()

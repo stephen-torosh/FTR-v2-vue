@@ -20,8 +20,8 @@ const avatar = computed(() => {
   <div :class="{ 'launch-window--show': isMenuShown }" class="launch-window-wrapper"></div>
   <div :class="{ 'launch-window--show': isMenuShown }" class="launch-window">
     <div class="top">
-      <div>OS Version - Beta 1</div>
-      <div>FireInc Studios 2024</div>
+      <div>OS Version - Beta 2</div>
+      <div>FireInc Studios 2025</div>
     </div>
     <div class="down">
       <div style="display: flex; align-items: center">
