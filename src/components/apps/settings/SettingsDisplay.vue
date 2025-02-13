@@ -26,6 +26,10 @@ const bg3 = computed(() => {
   return backgroundId.value == 3
 })
 
+const bg4 = computed(() => {
+  return backgroundId.value == 4
+})
+
 
 </script>
 
@@ -55,6 +59,7 @@ const bg3 = computed(() => {
         <img @click="settingsStore.setBackgroundId(1)" :class="{ 'unactive': !bg1, 'active': bg1 }" src="/src/assets/images/bg1.png" style="margin-right: 10px;" height="100px" alt="">
         <img @click="settingsStore.setBackgroundId(2)" :class="{ 'unactive': !bg2, 'active': bg2 }" src="/src/assets/images/bg2.png" style="margin-top: 10px;" height="100px" alt="">
         <img @click="settingsStore.setBackgroundId(3)" :class="{ 'unactive': !bg3, 'active': bg3 }" src="/src/assets/images/bg3.png" style="margin-left: 10px;" height="100px" alt="">
+        <img @click="settingsStore.setBackgroundId(4)" :class="{ 'unactive': !bg4, 'active': bg4 }" src="/src/assets/images/bg4.png" style="margin-left: 10px;" height="100px" alt="">
       </div>
     </div>
   </div>

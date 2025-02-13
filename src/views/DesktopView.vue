@@ -38,6 +38,10 @@ const bg3 = computed(() => {
   return backgroundId.value == 3
 })
 
+const bg4 = computed(() => {
+  return backgroundId.value == 4
+})
+
 const appsIcons = [
   {
     title: 'FTR',
@@ -90,7 +94,7 @@ function hideLaunchWindow() {
   <div
     id="desktop"
     :style="{ filter: `brightness(${brightness}%)` }"
-    :class="{ 'nocursor': screenSaver, 'bg1': bg1, 'bg2': bg2, 'bg3': bg3 }"
+    :class="{ 'nocursor': screenSaver, 'bg1': bg1, 'bg2': bg2, 'bg3': bg3, 'bg4': bg4 }"
     @mousemove="statusStore.restartScreenSaverTimer()"
   >
     <div
@@ -145,6 +149,11 @@ function hideLaunchWindow() {
 
 .bg3 {
   background-image: url('../assets/images/bg3.png');
+  background-size: cover;
+}
+
+.bg4 {
+  background-image: url('../assets/images/bg4.png');
   background-size: cover;
 }
 

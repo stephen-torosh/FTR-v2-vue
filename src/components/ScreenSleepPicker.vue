@@ -86,10 +86,14 @@ const bg3 = computed(() => {
   return backgroundId.value == 3
 })
 
+const bg4 = computed(() => {
+  return backgroundId.value == 4
+})
+
 </script>
 
 <template>
-  <div class="main2" :class="{ 'bg1': bg1, 'bg2': bg2, 'bg3': bg3 }"></div>
+  <div class="main2" :class="{ 'bg1': bg1, 'bg2': bg2, 'bg3': bg3, 'bg4': bg4 }"></div>
 
   <ScreenSleep_downerleft v-if="screenSleepOption1" />
   <ScreenSleep_downerright v-if="screenSleepOption2" />
@@ -130,6 +134,10 @@ const bg3 = computed(() => {
 
 .bg3 {
   background-image: url("../assets/images/bg3.png");
+}
+
+.bg4 {
+  background-image: url("../assets/images/bg4.png");
 }
 
 .optioner {
