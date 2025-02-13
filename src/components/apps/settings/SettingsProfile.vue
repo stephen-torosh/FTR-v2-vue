@@ -26,9 +26,16 @@ function switchEditMode() {
   }
 }
 
-function getImage($event) {
-  avatarImageUrl.value = URL.createObjectURL($event.target.files[0])
-  imageFile.value = URL.createObjectURL($event.target.files[0])
+const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+});
+
+async function getImage($event) {
+  avatarImageUrl.value = await toBase64($event.target.files[0])
+  imageFile.value = await toBase64($event.target.files[0])
 }
 </script>
 
