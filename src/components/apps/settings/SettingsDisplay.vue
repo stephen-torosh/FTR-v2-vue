@@ -42,7 +42,7 @@ const bg3 = computed(() => {
   <div class="centered">
     Screen Saver delay: {{ screensaverdelay }}s
     <div class="centered">
-      <input type="range" v-model="screensaverdelay" min="10" max="50" step="1">
+      <input type="range" v-model="screensaverdelay" min="60" max="180" step="1">
     </div>
   </div>
   <div class="centered">
