@@ -8,7 +8,7 @@ const webpage = document.getElementById('webpage')
     <button>search</button>
   </div>
   <div class="content">
-    <iframe id="webpage" src="https://fireinc.pp.ua" frameborder="0"></iframe>
+    <iframe src="https://cors-anywhere.herokuapp.com/fireinc.pp.ua"></iframe>
   </div>
 </template>
 
