@@ -1,14 +1,41 @@
-<script>
-const webpage = document.getElementById('webpage')
+<script setup>
+
+import { ref } from 'vue';
+
+const browserUrl = ref('')
+const contents = ref('')
+
+var cors_api_host = '0.0.0.0:8000';
+var cors_api_url = 'http://' + cors_api_host + '/';
+var slice = [].slice;
+var origin = window.location.protocol + '//' + window.location.host;
+var open = XMLHttpRequest.prototype.open;
+XMLHttpRequest.prototype.open = function() {
+    var args = slice.call(arguments);
+    var targetOrigin = /^https?:\/\/([^\/]+)/i.exec(args[1]);
+    if (targetOrigin && targetOrigin[0].toLowerCase() !== origin &&
+        targetOrigin[1] !== cors_api_host) {
+        args[1] = cors_api_url + args[1];
+    }
+    return open.apply(this, args);
+};
+
+
+async function browserSubmitFunc() {
+  const response = await fetch(browserUrl.value)
+  contents.value = await response.text()
+}
+
 </script>
 
 <template>
+  
   <div class="navbrowser">
-    <input type="text" />
-    <button>search</button>
+    <input type="text" id="browser-url" v-model="browserUrl"/>
+    <button @click="browserSubmitFunc()" id="browser-submit">search</button>
   </div>
   <div class="content">
-    <iframe src="https://cors-anywhere.herokuapp.com/fireinc.pp.ua"></iframe>
+    <div id="browser-contents" v-html="contents" />
   </div>
 </template>
 
@@ -18,9 +45,9 @@ input {
   width: 50%;
 }
 
-iframe {
-  width: 100%;
-  height: 100%;
+#browser-contents {
+  width: 1200px;
+  overflow-y: scroll;
 }
 
 .content {
