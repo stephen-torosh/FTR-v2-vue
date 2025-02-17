@@ -14,6 +14,7 @@ const { isMenuShown } = storeToRefs(statusStore)
 const avatar = computed(() => {
   return userAvatar.value === '' ? DefaultUserIcon : userAvatar.value
 })
+
 </script>
 
 <template>
@@ -21,30 +22,19 @@ const avatar = computed(() => {
   <div :class="{ 'launch-window--show': isMenuShown }" class="launch-window">
     <div class="top">
       <div>OS Version - Beta 2</div>
-      <div>FireInc Studios 2025</div>
+      <div style="margin-bottom: 30px;">FireInc Studios 2025</div>
+      <div>Official Website: <a style="color: red; text-decoration: none;" href="https://fireinc.pp.ua">https://fireinc.pp.ua</a></div>
     </div>
     <div class="down">
       <div style="display: flex; align-items: center">
         <img :src="avatar" alt="" width="24" height="24" />
         <h4>{{ username }}</h4>
       </div>
-      <div style="display: flex; align-items: center">
-        <img src="../assets/images/on-off-button.png" alt="" width="20" height="20" />
-      </div>
     </div>
   </div>
 </template>
 
 <style lang="scss">
-// .launch-window-wrapper {
-//   background-color: transparent;
-//   position: absolute;
-//   top: 0;
-//   bottom: 0;
-//   left: 0;
-//   right: 0;
-//   height: calc(100vh - 50px);
-// }
 
 body {
   font-family: caveat;

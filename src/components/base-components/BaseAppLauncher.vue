@@ -5,7 +5,7 @@ defineProps(['name', 'image', 'image-alt'])
 <template>
   <RouterLink style="text-decoration: none" :to="{ name: 'app', params: { appname: name } }">
     <div class="app-icon app-icon-wrapper">
-      <img class="app-icon__image" :src="image" :alt="image - alt" width="50%" height="50%" />
+      <img class="app-icon__image" :src="image" :alt="image - alt" width="40%" height="40%" />
       {{ name }}
     </div>
   </RouterLink>
@@ -18,8 +18,9 @@ defineProps(['name', 'image', 'image-alt'])
   align-items: center;
   flex-direction: column;
   color: white;
-  width: calc(100vw / 16);
-  height: calc(100vw / 16);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  width: calc(100vw / 12);
+  height: calc(100vw / 12);
   font-size: 1.5em;
   font-family: caveat;
 }
