@@ -35,7 +35,8 @@ async function browserSubmitFunc() {
     <button @click="browserSubmitFunc()" id="browser-submit">search</button>
   </div>
   <div class="content">
-    <div id="browser-contents" v-html="contents" />
+    <!-- <div id="browser-contents" v-html="contents" /> -->
+    <iframe src="https://fireinc.pp.ua" width="100%" height="100%" frameborder="0"></iframe>
   </div>
 </template>
 
@@ -52,7 +53,7 @@ input {
 
 .content {
   width: 100%;
-  height: calc(100% - 30px);
+  height: 100%;
 }
 
 .navbrowser {

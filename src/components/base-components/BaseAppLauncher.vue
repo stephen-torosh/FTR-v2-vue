@@ -21,7 +21,7 @@ defineProps(['name', 'image', 'image-alt'])
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   width: calc(100vw / 12);
   height: calc(100vw / 12);
-  font-size: 1.5em;
+  font-size: 25px;
   font-family: caveat;
 }
 
