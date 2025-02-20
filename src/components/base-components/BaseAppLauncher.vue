@@ -18,11 +18,15 @@ defineProps(['name', 'image', 'image-alt'])
   align-items: center;
   flex-direction: column;
   color: white;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   width: calc(100vw / 12);
   height: calc(100vw / 12);
   font-size: 25px;
   font-family: caveat;
+}
+
+img {
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  border-radius: 20%;
 }
 
 .app-icon-wrapper:hover {

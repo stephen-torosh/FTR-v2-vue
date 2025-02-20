@@ -127,7 +127,6 @@ def printTooManyParamsErr(command):
 
 
 # commands definer
-
 @app.route("/terminal/<value>")
 def command(value):
     newval = value.replace("~", "/")
@@ -190,3 +189,7 @@ def command(value):
 
     elif (lenOfValueList == 0):
         pass
+
+@app.errorhandler(404)
+def errorh(e):
+    return '<div style="color: red;">-> FTR: sorry, there was an error on server</div>'

@@ -6,7 +6,7 @@ const browserUrl = ref('')
 const contents = ref('')
 
 var cors_api_host = '0.0.0.0:8000';
-var cors_api_url = 'http://' + cors_api_host + '/';
+var cors_api_url = 'https://www.google.com' + cors_api_host + '/';
 var slice = [].slice;
 var origin = window.location.protocol + '//' + window.location.host;
 var open = XMLHttpRequest.prototype.open;
