@@ -7,6 +7,10 @@ import ScreenSleep_upperleft from './ScreenSleep/ScreenSleep_upperleft.vue'
 import ScreenSleep_upperright from './ScreenSleep/ScreenSleep_upperright.vue'
 import ScreenSleep_uppercenter from './ScreenSleep/ScreenSleep_uppercenter.vue'
 
+import ScreenSleep_centerleft from './ScreenSleep/ScreenSleep_centerleft.vue'
+import ScreenSleep_centerright from './ScreenSleep/ScreenSleep_centerright.vue'
+import ScreenSleep_centercenter from './ScreenSleep/ScreenSleep_centercenter.vue'
+
 import { computed, ref } from 'vue'
 
 import { useSettingsStore } from '@/stores/settings'
@@ -19,7 +23,7 @@ const { screenSaverStyler } = storeToRefs(useStatusesStore())
 const option = ref(screenSaverStyle.value)
 
 function optionAdd() {
-  if (option.value < 6) {
+  if (option.value < 9) {
     option.value++
   }
 }
@@ -72,6 +76,17 @@ const screenSleepOption6 = computed(() => {
   return option.value == 6
 })
 
+const screenSleepOption7 = computed(() => {
+  return option.value == 7
+})
+
+const screenSleepOption8 = computed(() => {
+  return option.value == 8
+})
+
+const screenSleepOption9 = computed(() => {
+  return option.value == 9
+})
 
 
 const bg1 = computed(() => {
@@ -103,13 +118,32 @@ const bg4 = computed(() => {
   <ScreenSleep_upperright v-if="screenSleepOption5" />
   <ScreenSleep_uppercenter v-if="screenSleepOption6" />
 
+  <ScreenSleep_centerleft v-if="screenSleepOption7" />
+  <ScreenSleep_centerright v-if="screenSleepOption8" />
+  <ScreenSleep_centercenter v-if="screenSleepOption9" />
+
+  <div class="optioner-name">
+    <span v-show="screenSleepOption1">Downer Left (default)</span>
+    <span v-show="screenSleepOption2">Downer Right</span>
+    <span v-show="screenSleepOption3">Downer Center</span>
+    <span v-show="screenSleepOption4">Upper Left</span>
+    <span v-show="screenSleepOption5">Upper Right</span>
+    <span v-show="screenSleepOption6">Upper Center</span>
+    <span v-show="screenSleepOption7">Center Left</span>
+    <span v-show="screenSleepOption8">Center Right</span>
+    <span v-show="screenSleepOption9">Center Center</span>
+  </div>
+  
   <div class="optioner">
-    <div class="item" :class="{ 'item__active': option==1 }"></div>
-    <div class="item" :class="{ 'item__active': option==2 }"></div> 
-    <div class="item" :class="{ 'item__active': option==3 }"></div>
-    <div class="item" :class="{ 'item__active': option==4 }"></div>
-    <div class="item" :class="{ 'item__active': option==5 }"></div>
-    <div class="item" :class="{ 'item__active': option==6 }"></div>
+    <div class="item" :class="{ 'item__activeblue': option==1 }"></div>
+    <div class="item" :class="{ 'item__activeblue': option==2 }"></div> 
+    <div class="item" :class="{ 'item__activeblue': option==3 }"></div>
+    <div class="item" :class="{ 'item__activered': option==4 }"></div>
+    <div class="item" :class="{ 'item__activered': option==5 }"></div>
+    <div class="item" :class="{ 'item__activered': option==6 }"></div>
+    <div class="item" :class="{ 'item__activegreen': option==7 }"></div>
+    <div class="item" :class="{ 'item__activegreen': option==8 }"></div>
+    <div class="item" :class="{ 'item__activegreen': option==9 }"></div>
   </div>
 
   <button class="save" @click="saveChanges()">Save changes</button>
@@ -144,12 +178,23 @@ const bg4 = computed(() => {
   display: flex;
   justify-content: space-between;
   position: absolute;
-  width: 700px;
+  width: 1050px;
   height: 10px;
   left: 50%;
   top: calc(100% - 10px);
   transform: translateX(-50%);
   z-index: 2000;
+}
+
+.optioner-name {
+  display: flex;
+  justify-content: center;
+  color: white;
+  position: absolute;
+  top: 96%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5em;
 }
 
 .save {
@@ -185,7 +230,15 @@ const bg4 = computed(() => {
   border-radius: 10px;
 }
 
-.item__active {
+.item__activeblue {
   background-color: rgb(36, 91, 255);
+}
+
+.item__activegreen {
+  background-color: lime;
+}
+
+.item__activered {
+  background-color: red;
 }
 </style>

@@ -175,6 +175,6 @@ function hideLaunchWindow() {
 }
 
 .appsDiv--hidden {
-  left: -100px;
+  left: -150px;
 }
 </style>
