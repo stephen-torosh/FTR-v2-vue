@@ -5,6 +5,7 @@ import FTR from '@/components/apps/FTRView.vue'
 import Settings from '@/components/apps/SettingsView.vue'
 import Calculator from '@/components/apps/CalculatorView.vue'
 import Reminder from '@/components/apps/ReminderView.vue'
+import FileExp from '@/components/apps/FileExplorerView.vue'
 import { useStatusesStore } from '@/stores/statuses'
 import { useSettingsStore } from '@/stores/settings'
 import { computed } from 'vue'
@@ -28,6 +29,8 @@ const activeComponent = computed(() => {
       return Calculator
     case 'reminder':
       return Reminder
+    case 'File Exp':
+      return FileExp
     default:
       return FTR
   }

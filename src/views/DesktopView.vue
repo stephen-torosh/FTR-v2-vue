@@ -3,6 +3,7 @@ import ftrIcon from '@/assets/images/firetr.png'
 import browserIcon from '@/assets/images/browser.png'
 import settingsIcon from '@/assets/images/settings.png'
 import firetrLogo from '@/assets/images/fireTR-OS-logo.png'
+import fexpIcon from '@/assets/images/FileExp.png'
 import BaseAppLauncher from '@/components/base-components/BaseAppLauncher.vue'
 import LaunchWindow from '@/components/LaunchWindowView.vue'
 import calculatorIcon from '@/assets/images/calculator.png'
@@ -68,6 +69,11 @@ const appsIcons = [
     title: 'reminder',
     image: reminderIcon,
     imageAlt: 'reminder icon'
+  },
+  {
+    title: 'File Exp',
+    image: fexpIcon,
+    imageAlt: 'FileExp'
   }
 ]
 
@@ -118,9 +124,11 @@ function hideLaunchWindow() {
     </div>
     <div class="navbar" :class="{ 'navbar--hidden': !isUnlocked || screenSaver }">
       <div class="navbar__left">
-        <button @click="onLaunchClick" class="navbar__launch-button">
-          <img class="fireTR-icon" :src="firetrLogo" alt="" height="80%" />
-        </button>
+        <div class="navbar__applaunch-button">
+          <button class="navbar__launch-button" style="text-decoration: none; width: 65%; height: 65%;" @click="onLaunchClick">
+            <img height="100%" :src="firetrLogo" alt="">
+          </button>
+        </div>
         <div class="navbar__applaunch-button">
           <RouterLink style="text-decoration: none; width: 65%; height: 65%;" to="/desktop/app/FTR">
             <img height="100%" :src="ftrIcon" alt="">
@@ -144,6 +152,11 @@ function hideLaunchWindow() {
         <div class="navbar__applaunch-button">
           <RouterLink style="text-decoration: none; width: 65%; height: 65%;" to="/desktop/app/reminder">
             <img height="100%" :src="reminderIcon" alt="">
+          </RouterLink>
+        </div>
+        <div class="navbar__applaunch-button">
+          <RouterLink style="text-decoration: none; width: 65%; height: 65%;" to="/desktop/app/File%20Exp">
+            <img height="100%" :src="fexpIcon" alt="">
           </RouterLink>
         </div>
       </div>

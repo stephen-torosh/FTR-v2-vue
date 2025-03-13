@@ -66,6 +66,7 @@ body {
   background-color: rgba(0, 0, 0, 0.422);
   color: white;
   font-family: caveat;
+  backdrop-filter: blur(6px);
 }
 
 .navbar__left,
@@ -119,6 +120,10 @@ body {
   height: 40px;
   border: 0;
   margin-right: 12px;
+}
+
+.navbar__applaunch-button:hover {
+  opacity: 0.8;
 }
 
 .centered {
