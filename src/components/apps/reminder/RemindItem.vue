@@ -16,7 +16,7 @@ defineProps([
     </div>
     <div class="reminder__data">
       <h3>{{ event.name }}</h3>
-      <p>{{ event.date }} at {{ event.time }}</p>
+      <p>{{ event.date }} at {{ event.fullTime }}</p>
     </div>
   </div>
 </template>

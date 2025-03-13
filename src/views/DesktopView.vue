@@ -121,8 +121,31 @@ function hideLaunchWindow() {
         <button @click="onLaunchClick" class="navbar__launch-button">
           <img class="fireTR-icon" :src="firetrLogo" alt="" height="80%" />
         </button>
-
-        FireTR-v2
+        <div class="navbar__applaunch-button">
+          <RouterLink style="text-decoration: none; width: 65%; height: 65%;" to="/desktop/app/FTR">
+            <img height="100%" :src="ftrIcon" alt="">
+          </RouterLink>
+        </div>
+        <div class="navbar__applaunch-button">
+          <RouterLink style="text-decoration: none; width: 65%; height: 65%;" to="/desktop/app/browser">
+            <img height="100%" :src="browserIcon" alt="">
+          </RouterLink>
+        </div>
+        <div class="navbar__applaunch-button">
+          <RouterLink style="text-decoration: none; width: 65%; height: 65%;" to="/desktop/app/settings">
+            <img height="100%" :src="settingsIcon" alt="">
+          </RouterLink>
+        </div>
+        <div class="navbar__applaunch-button">
+          <RouterLink style="text-decoration: none; width: 65%; height: 65%;" to="/desktop/app/calculator">
+            <img height="100%" :src="calculatorIcon" alt="">
+          </RouterLink>
+        </div>
+        <div class="navbar__applaunch-button">
+          <RouterLink style="text-decoration: none; width: 65%; height: 65%;" to="/desktop/app/reminder">
+            <img height="100%" :src="reminderIcon" alt="">
+          </RouterLink>
+        </div>
       </div>
       <div class="navbar__right">{{ fullTime }}</div>
     </div>
