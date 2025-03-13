@@ -6,6 +6,7 @@ import firetrLogo from '@/assets/images/fireTR-OS-logo.png'
 import BaseAppLauncher from '@/components/base-components/BaseAppLauncher.vue'
 import LaunchWindow from '@/components/LaunchWindowView.vue'
 import calculatorIcon from '@/assets/images/calculator.png'
+import reminderIcon from '@/assets/images/reminder.png'
 import ScreenSleep from '@/components/ScreenSleep.vue'
 import LockedScreen from '@/components/LockedScreen.vue'
 import { useStatusesStore } from '@/stores/statuses.js'
@@ -49,7 +50,7 @@ const appsIcons = [
     imageAlt: 'ftr icon'
   },
   {
-    title: 'Browser',
+    title: 'browser',
     image: browserIcon,
     imageAlt: 'browser icon'
   },
@@ -62,6 +63,11 @@ const appsIcons = [
     title: 'calculator',
     image: calculatorIcon,
     imageAlt: 'calculator icon'
+  },
+  {
+    title: 'reminder',
+    image: reminderIcon,
+    imageAlt: 'reminder icon'
   }
 ]
 

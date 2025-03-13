@@ -4,6 +4,7 @@ import Browser from '@/components/apps/BrowserView.vue'
 import FTR from '@/components/apps/FTRView.vue'
 import Settings from '@/components/apps/SettingsView.vue'
 import Calculator from '@/components/apps/CalculatorView.vue'
+import Reminder from '@/components/apps/ReminderView.vue'
 import { useStatusesStore } from '@/stores/statuses'
 import { useSettingsStore } from '@/stores/settings'
 import { computed } from 'vue'
@@ -19,12 +20,14 @@ const activeComponent = computed(() => {
   switch (route.params.appname) {
     case 'FTR':
       return FTR
-    case 'Browser':
+    case 'browser':
       return Browser
     case 'settings':
       return Settings
     case 'calculator':
       return Calculator
+    case 'reminder':
+      return Reminder
     default:
       return FTR
   }
@@ -38,7 +41,7 @@ const activeComponent = computed(() => {
   >
     <div class="app-window">
       <h4>{{ route.params.appname }}</h4>
-      <button @click="router.push({ name: 'desktop' })" style="margin-right: 10px; color: black">
+      <button class="close-window-button" @click="router.push({ name: 'desktop' })">
         X
       </button>
     </div>
@@ -69,6 +72,15 @@ h4 {
   align-items: center;
   background-color: rgba(0, 0, 0, 0.9);
   height: 30px;
+}
+
+.close-window-button {
+  margin-right: 10px;
+  color: #ffffff;
+  padding: 0 5px;
+  border: 0;
+  border-radius: 2px;
+  background-color: #b52020;
 }
 
 .app-window-wrapper {

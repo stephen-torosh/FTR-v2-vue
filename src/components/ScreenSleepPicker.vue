@@ -203,7 +203,7 @@ const bg4 = computed(() => {
   height: 40px;
   top: 20px;
   left: calc(100% - 50px);
-  transform: translate(-50%,-50%);
+  transform: translate(-60%,-20%);
   border: 0;
   border-radius: 10px;
   background-color: rgb(36, 91, 255);
@@ -212,11 +212,11 @@ const bg4 = computed(() => {
 
 .discard {
   position: absolute;
-  width: 110px;
+  width: 115px;
   height: 40px;
   top: 20px;
   left: calc(100% - 50px);
-  transform: translate(-170%,-50%);
+  transform: translate(-190%,-20%);
   border: 0;
   border-radius: 10px;
   background-color: rgb(170, 170, 170);
