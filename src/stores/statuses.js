@@ -9,7 +9,8 @@ export const useStatusesStore = defineStore('statuses', {
       isScreenSaverOn: false,
       isUnlocked: true,
       isPasswordCorrect: true,
-      screenSaverStyler: false
+      screenSaverStyler: false,
+      isWidgetNav: false,
     }
   },
   actions: {
@@ -39,6 +40,9 @@ export const useStatusesStore = defineStore('statuses', {
       } else {
         this.isPasswordCorrect = false
       }
+    },
+    setWidgetNav(status) {
+      this.isWidgetNav = status
     }
   }
 })

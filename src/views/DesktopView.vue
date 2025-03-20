@@ -10,6 +10,7 @@ import calculatorIcon from '@/assets/images/calculator.png'
 import reminderIcon from '@/assets/images/reminder.png'
 import ScreenSleep from '@/components/ScreenSleep.vue'
 import LockedScreen from '@/components/LockedScreen.vue'
+import WidgetNavView from '@/components/widgets/WidgetNavView.vue'
 import { useStatusesStore } from '@/stores/statuses.js'
 import { useSettingsStore } from '@/stores/settings'
 import { computed, ref, onMounted } from 'vue'
@@ -167,6 +168,7 @@ function hideLaunchWindow() {
     <ScreenSleep v-if="screenSaver" />
     <LockedScreen v-if="!isUnlocked" />
     <ScreenSleepPicker v-if="screenSaverStyler"/>
+    <WidgetNavView />
   </div>
 </template>
 

@@ -6,7 +6,7 @@ import { computed } from 'vue'
 
 const settingsStore = useSettingsStore()
 const statusesStore = useStatusesStore()
-const { brightness, brightnessValue, screensaverdelay } = storeToRefs(settingsStore)
+const { brightness, brightnessValue, screensaverdelay, launchcenter } = storeToRefs(settingsStore)
 const { backgroundId, setBackgroundId } = storeToRefs(settingsStore)
 const { isScreenSaverOn,screenSaverStyler } = storeToRefs(statusesStore)
 
@@ -29,6 +29,7 @@ const bg3 = computed(() => {
 const bg4 = computed(() => {
   return backgroundId.value == 4
 })
+
 
 </script>
 
@@ -64,13 +65,6 @@ const bg4 = computed(() => {
   </div>
   <div class="centered">
     <span style="font-size: 20px;">Launch Window Position</span>
-    <div>
-      <input type="radio" name="launchwindow">
-      <label for="" style="margin-right: 10px;">Side</label>
-
-      <input type="radio" name="launchwindow">
-      <label for="">Center</label>
-    </div>
   </div>
   <div class="centered reset-button">
     <button @click="settingsStore.resetSettings()">reset settings</button>
