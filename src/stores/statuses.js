@@ -7,7 +7,7 @@ export const useStatusesStore = defineStore('statuses', {
       isMenuShown: false,
       timer: null,
       isScreenSaverOn: false,
-      isUnlocked: false,
+      isUnlocked: true,
       isPasswordCorrect: true,
       screenSaverStyler: false
     }

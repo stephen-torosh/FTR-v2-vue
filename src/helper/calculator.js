@@ -24,7 +24,6 @@ export function doTheLastAction(action, a, b) {
       return String(multiply(a, b))
     case '/':
       return String(divide(a, b))
-
     default:
       return '0'
   }

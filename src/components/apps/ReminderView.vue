@@ -26,24 +26,33 @@ function submitForm() {
 
 
 
-const currentDate = new Date()
+const currentDate = new Date(); 
+const fullDate = computed(() => currentDate.toISOString().split('T')[0]);
 
-const fullDate = computed(() => {
-  return currentDate.toISOString().split('T')[0];
-});
+const isDateInputSelected = computed(() => !date.value);
 
 function handleTimeUpdate(event) {
   const inputTime = event.target.value
-  const tim = new Date().toISOString().split('T')[0];
-  const time = new Date().toISOString().split('T')[1].slice(0,5)
-  const dateNow = new Date(tim).getTime()
+  const currentTime = new Date().toISOString().split('T')[1].slice(0,5)
+  const dateNow = new Date(fullDate.value).getTime()
   const dateInp = new Date(date.value).getTime()
   console.log(dateNow, dateInp)
+  console.log(new Date(fullDate.value))
   if (dateNow === dateInp) {
-    console.log(time)
-    console.log(dateNow === dateInp)
+    time.value = currentTime
+
+    const totalTime = time.value.split(':').reduce((accumulator, element, index) => {
+      return index ? accumulator + element : accumulator + element * 60
+    }, 0)
+    const totalCurrentTime = currentTime.split(':').reduce((accumulator, element, index) => {
+      return index ? accumulator + element : accumulator + element * 60
+    }, 0)
+    
+    console.log(totalTime, totalCurrentTime)
   } else {
+    time.value = event.target.value
     console.log(inputTime)
+
   }
 }
 
@@ -72,7 +81,7 @@ function handleTimeUpdate(event) {
           <input type="date" :min="fullDate" name="" id="" v-model="date">
         </label>
         <label for="">
-          <input type="time" name="" id="" @change="handleTimeUpdate($event)">
+          <input type="time" :disabled="isDateInputSelected" name="" id="" v-model="time" @change="handleTimeUpdate($event)">
         </label>
       </div>
     </form>
