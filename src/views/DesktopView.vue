@@ -18,7 +18,7 @@ import { storeToRefs } from 'pinia'
 import ScreenSleepPicker from '@/components/ScreenSleepPicker.vue'
 
 const statusStore = useStatusesStore()
-const { isMenuShown, isUnlocked, screenSaverStyler } = storeToRefs(statusStore)
+const { isMenuShown, isUnlocked, screenSaverStyler, isWidgetNav } = storeToRefs(statusStore)
 
 onMounted(() => {
   statusStore.startScreenSaverTimer()
@@ -101,6 +101,19 @@ function hideLaunchWindow() {
   statusStore.switchMenuStatus(false)
 }
 
+function mouseClick($event) {
+  const mouseX = $event.clientX
+  const innerX = window.innerWidth
+
+  if (innerX - mouseX < 50) {
+    console.log("open")
+    isWidgetNav.value = true
+  } else if (innerX - mouseX > 400) {
+    console.log("close")
+    isWidgetNav.value = false
+  }
+}
+
 </script>
 
 <template>
@@ -109,6 +122,7 @@ function hideLaunchWindow() {
     :style="{ filter: `brightness(${brightness}%)` }"
     :class="{ 'nocursor': screenSaver, 'bg1': bg1, 'bg2': bg2, 'bg3': bg3, 'bg4': bg4 }"
     @mousemove="statusStore.restartScreenSaverTimer()"
+    @click="mouseClick($event)"
   >
     <div
       @click="hideLaunchWindow"

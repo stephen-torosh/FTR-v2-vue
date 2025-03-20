@@ -40,8 +40,8 @@ const fullDate = computed(
 
 <template>
     <div class="container" :class="{ 'container-show': isWidgetNav }">
-        <h1 class="title">{{ fullTime }}</h1>
-        <h2 class="date">{{ fullDate }}</h2>
+        <span class="title">{{ fullTime }}</span>
+        <span class="date">{{ fullDate }}</span>
     </div>
 </template>
 
@@ -49,6 +49,7 @@ const fullDate = computed(
 
 .container {
   display: flex;
+  flex-direction: column;
   position: absolute;
   left: 100%;
   font-family: caveat;
@@ -57,6 +58,8 @@ const fullDate = computed(
   background-color: rgba(0, 0, 0, 0.204);
   transition: 0.15s;
   backdrop-filter: blur(4px);
+
+  overflow-y: scroll;
 }
 
 .container-show {
@@ -64,17 +67,22 @@ const fullDate = computed(
 }
 
 .title {
-    margin-top: 10px;
-    color: white;
-    font-size: 80px;
-    font-weight: 400;
-    margin-left: 100%;
-    transform: translateX(-120%);
+  margin-top: 10px;
+  color: white;
+  max-height: 100px;
+  font-size: 80px;
+  font-weight: 400;
+  text-align: end;
+  margin-right: 30px;
 }
 
 .date {
-    color: white;
-    font-size: 40px;
-    font-weight: 400;
+  color: white;
+  font-size: 25px;
+  font-weight: 400;
+  text-align: end;
+  margin-right: 25px;
+  margin-bottom: 20px;
+  
 }
 </style>
