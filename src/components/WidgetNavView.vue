@@ -5,9 +5,20 @@ import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 import { ref } from 'vue';
 
+import WeatherView from './widgets/WeatherView.vue';
+
 const { isWidgetNav } = storeToRefs(useStatusesStore())
 
 const date = ref(new Date())
+
+
+
+
+
+
+setInterval(() => {
+  date.value = new Date()
+}, 1000)
 
 const fullTime = computed(
   () =>
@@ -42,6 +53,7 @@ const fullDate = computed(
     <div class="container" :class="{ 'container-show': isWidgetNav }">
         <span class="title">{{ fullTime }}</span>
         <span class="date">{{ fullDate }}</span>
+        <WeatherView />
     </div>
 </template>
 

@@ -1,0 +1,89 @@
+<script>
+
+import { onMounted, ref } from 'vue'
+
+const APIkey = '25ea68b1360998239ca904c381978516'
+const APIurl = 'https://api.openweathermap.org/data/2.5/weather?units=metric'
+
+const temp = ref('')
+const city = ref('')
+const weather = ref('')
+const country = ref('')
+
+const lon = ref('')
+const lat = ref('')
+
+
+
+setInterval(async () => {
+  navigator.geolocation.getCurrentPosition((position) => {
+    lat.value = position.coords.latitude;
+    lon.value = position.coords.longitude;
+  });  
+  const response = await fetch(APIurl + `&appid=${APIkey}&lat=${lat.value}&lon=${lon.value}`)
+  var data = await response.json()
+  temp.value = data.main.temp
+  city.value = data.name
+  country.value = data.sys.country
+  weather.value = data.weather[0].main 
+}, 200)
+setTimeout(() => {
+  console.log(temp.value)
+  document.querySelector("#temp").innerHTML = Math.round(temp.value) + '°c'
+  document.querySelector('#region').innerHTML = `${city.value}, ${country.value}`
+}, 500)
+
+</script>
+
+<template>
+<main>
+  <h3>Weather Forecast</h3>
+  <div class="main">
+    <img src="@/assets/images/weather/clear.png" width="150px" alt="">
+    <h1 id="temp"></h1>
+    <h2 id="region">Kyiv, UA</h2>
+  </div>
+</main>
+</template>
+
+<style scoped>
+
+main {
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(47deg, rgba(54, 9, 121, 0.8) 14%, rgba(0,212,255,0.8) 100%);
+  border-radius: 20px;
+  width: 350px;
+  height: 350px;
+  padding: 20px;
+  color: white;
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.main h2, .main h1 {
+  font-weight: 500;
+}
+
+.main h1 {
+  font-size: 70px;
+}
+
+.main h2 {
+  font-size: 40px;
+  font-weight: 300;
+}
+
+h3 {
+  font-size: 15px;
+  font-weight: 400;
+  text-align: center;
+}
+
+</style>

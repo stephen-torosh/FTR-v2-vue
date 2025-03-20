@@ -10,7 +10,7 @@ export const useStatusesStore = defineStore('statuses', {
       isUnlocked: true,
       isPasswordCorrect: true,
       screenSaverStyler: false,
-      isWidgetNav: true,
+      isWidgetNav: false,
     }
   },
   actions: {
