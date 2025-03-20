@@ -24,7 +24,7 @@ onMounted(() => {
 })
 
 const settingsStore = useSettingsStore()
-const { brightness, screenSaver } = storeToRefs(settingsStore)
+const { brightness, screenSaver, launchcenter } = storeToRefs(settingsStore)
 
 const { backgroundId } = storeToRefs(settingsStore)
 
@@ -123,7 +123,7 @@ function hideLaunchWindow() {
       />
     </div>
     <div class="navbar" :class="{ 'navbar--hidden': !isUnlocked || screenSaver }">
-      <div class="navbar__left">
+      <div class="navbar__left" :class="{ 'navbar__center': launchcenter }">
         <div class="navbar__applaunch-button">
           <button class="navbar__launch-button" style="text-decoration: none; width: 65%; height: 65%;" @click="onLaunchClick">
             <img height="100%" :src="firetrLogo" alt="">
@@ -218,5 +218,9 @@ function hideLaunchWindow() {
 
 .appsDiv--hidden {
   left: -150px;
+}
+
+.navbar__center {
+  margin: 0 auto;
 }
 </style>

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import defaultAvatarImage from '@/assets/images/default-user.jpg'
-const defaultSettings = { brightness: 100, screensaverdelay: 120, screenSaver: false, screenSaverStyle: 1, backgroundId: 1 }
+const defaultSettings = { brightness: 100, screensaverdelay: 120, screenSaver: false, screenSaverStyle: 1, backgroundId: 1, launchcenter: false }
 
 export const useSettingsStore = defineStore('settings', {
   state: () => {
@@ -12,6 +12,7 @@ export const useSettingsStore = defineStore('settings', {
       password: 'default',
       screenSaverStyle: 1,
       backgroundId: 1,
+      launchcenter: false,
     }
   },
   actions: {
@@ -38,6 +39,9 @@ export const useSettingsStore = defineStore('settings', {
     },
     setBackgroundId(id) {
       this.backgroundId = id
+    },
+    setLaunchStatus(stat) {
+      this.launchcenter = stat
     }
     
   },

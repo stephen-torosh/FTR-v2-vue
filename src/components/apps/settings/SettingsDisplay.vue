@@ -30,7 +30,6 @@ const bg4 = computed(() => {
   return backgroundId.value == 4
 })
 
-
 </script>
 
 <template>
@@ -61,6 +60,16 @@ const bg4 = computed(() => {
         <img @click="settingsStore.setBackgroundId(3)" :class="{ 'unactive': !bg3, 'active': bg3 }" src="/src/assets/images/bg3.png" style="margin-left: 10px;" height="100px" alt="">
         <img @click="settingsStore.setBackgroundId(4)" :class="{ 'unactive': !bg4, 'active': bg4 }" src="/src/assets/images/bg4.png" style="margin-left: 10px;" height="100px" alt="">
       </div>
+    </div>
+  </div>
+  <div class="centered">
+    <span style="font-size: 20px;">Launch Window Position</span>
+    <div>
+      <input type="radio" name="launchwindow">
+      <label for="" style="margin-right: 10px;">Side</label>
+
+      <input type="radio" name="launchwindow">
+      <label for="">Center</label>
     </div>
   </div>
   <div class="centered reset-button">

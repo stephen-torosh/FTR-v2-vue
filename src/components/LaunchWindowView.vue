@@ -6,7 +6,7 @@ import { useSettingsStore } from '@/stores/settings'
 import DefaultUserIcon from '@/assets/images/default-user.jpg'
 
 const settingsStore = useSettingsStore()
-const { username, userAvatar } = storeToRefs(settingsStore)
+const { username, userAvatar, launchcenter } = storeToRefs(settingsStore)
 
 const statusStore = useStatusesStore()
 const { isMenuShown } = storeToRefs(statusStore)
@@ -18,8 +18,8 @@ const avatar = computed(() => {
 </script>
 
 <template>
-  <div :class="{ 'launch-window--show': isMenuShown }" class="launch-window-wrapper"></div>
-  <div :class="{ 'launch-window--show': isMenuShown }" class="launch-window">
+  <div :class="{ 'launch-window--show': isMenuShown, 'launch-window__center': launchcenter }" class="launch-window-wrapper"></div>
+  <div :class="{ 'launch-window--show': isMenuShown, 'launch-window__center': launchcenter }" class="launch-window">
     <div class="top">
       <div>OS Version - Beta 3</div>
       <div style="margin-bottom: 30px;">FireInc Studios 2025</div>
@@ -56,7 +56,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  left: -360px;
+  left: 15px;
+  top: 450px;
   width: 350px;
   height: 350px;
   padding: 20px;
@@ -66,11 +67,16 @@ body {
 }
 
 .launch-window-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-top: calc(100vh - 410px);
   position: absolute;
   background-color: rgba(125, 125, 125, 0.5);
   backdrop-filter: blur(3px);
-  left: -360px;
+  
+  left: 15px;
+  top: 450px;
   width: 350px;
   height: 350px;
   z-index: 1;
@@ -80,5 +86,12 @@ body {
 
 .launch-window--show {
   left: 15px;
+  top: 0px;
+}
+
+.launch-window__center {
+  margin-left: 50vw;
+  transform: translateX(-50%);
+  left: 0;
 }
 </style>
