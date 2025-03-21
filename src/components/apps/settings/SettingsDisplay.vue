@@ -63,9 +63,6 @@ const bg4 = computed(() => {
       </div>
     </div>
   </div>
-  <div class="centered">
-    <span style="font-size: 20px;">Launch Window Position</span>
-  </div>
   <div class="centered reset-button">
     <button @click="settingsStore.resetSettings()">reset settings</button>
   </div>
