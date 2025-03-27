@@ -1,6 +1,6 @@
-<script>
+<script setup>
 
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 
 const APIkey = '25ea68b1360998239ca904c381978516'
 const APIurl = 'https://api.openweathermap.org/data/2.5/weather?units=metric'
@@ -10,28 +10,40 @@ const city = ref('')
 const weather = ref('')
 const country = ref('')
 
-const lon = ref('')
-const lat = ref('')
+// const lon = computed(() => navigator.geolocation.getCurrentPosition((position) => position.coords.longitude));
+// const lat = computed(() => navigator.geolocation.getCurrentPosition((position) => position.coords.latitude));
 
+const lon = ref(0)
+const lat = ref(0)
 
+function getCoords() { 
+  return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition((position) => {lon.value = position.coords.longitude; console.log(position.coords.longitude)})
+      navigator.geolocation.getCurrentPosition((position) => {lat.value = position.coords.latitude; console.log(position.coords.latitude)})
+      console.log(lon.value, lat.value)
+    setTimeout(() => {
+      resolve()
+    },500)
+  })
+}
 
-setInterval(async () => {
-  navigator.geolocation.getCurrentPosition((position) => {
-    lat.value = position.coords.latitude;
-    lon.value = position.coords.longitude;
-  });  
+async function getWeatherData() {
+  console.log(`&lat=${lat.value}&lon=${lon.value}`)
   const response = await fetch(APIurl + `&appid=${APIkey}&lat=${lat.value}&lon=${lon.value}`)
   var data = await response.json()
   temp.value = data.main.temp
   city.value = data.name
   country.value = data.sys.country
   weather.value = data.weather[0].main 
-}, 200)
-setTimeout(() => {
-  console.log(temp.value)
-  document.querySelector("#temp").innerHTML = Math.round(temp.value) + '°c'
-  document.querySelector('#region').innerHTML = `${city.value}, ${country.value}`
-}, 500)
+  return response
+}
+
+onMounted(async () => {
+  await getCoords()
+  await getWeatherData()
+  // setInterval(() => getCoords(), 10 * 60 * 1000)
+  // setInterval(() => getWeatherData(), 2 * 60 * 1000)
+})
 
 </script>
 
@@ -40,8 +52,8 @@ setTimeout(() => {
   <h3>Weather Forecast</h3>
   <div class="main">
     <img src="@/assets/images/weather/clear.png" width="150px" alt="">
-    <h1 id="temp"></h1>
-    <h2 id="region">Kyiv, UA</h2>
+    <h1 id="temp">{{ Math.round(temp) }}°c</h1>
+    <h2 id="region">{{ city }}, {{ country }}</h2>
   </div>
 </main>
 </template>

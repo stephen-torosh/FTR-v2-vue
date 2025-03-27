@@ -66,16 +66,16 @@ const appsIcons = [
     image: calculatorIcon,
     imageAlt: 'calculator icon'
   },
-  // {
-  //   title: 'reminder',
-  //   image: reminderIcon,
-  //   imageAlt: 'reminder icon'
-  // },
-  // {
-  //   title: 'File Exp',
-  //   image: fexpIcon,
-  //   imageAlt: 'FileExp'
-  // }
+  {
+    title: 'reminder',
+    image: reminderIcon,
+    imageAlt: 'reminder icon'
+  },
+  {
+    title: 'File Exp',
+    image: fexpIcon,
+    imageAlt: 'FileExp'
+  }
 ]
 
 function onLaunchClick() {
@@ -182,7 +182,7 @@ function mouseClick($event) {
     <ScreenSleep v-if="screenSaver" />
     <LockedScreen v-if="!isUnlocked" />
     <ScreenSleepPicker v-if="screenSaverStyler"/>
-    <!--<WidgetNavView />-->
+    <WidgetNavView />
   </div>
 </template>
 
