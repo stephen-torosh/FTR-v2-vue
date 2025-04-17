@@ -21,7 +21,7 @@ const avatar = computed(() => {
   <div :class="{ 'launch-window--show': isMenuShown, 'launch-window__center': launchcenter }" class="launch-window-wrapper"></div>
   <div :class="{ 'launch-window--show': isMenuShown, 'launch-window__center': launchcenter }" class="launch-window">
     <div class="top">
-      <div>OS Version - Release v1</div>
+      <div>OS Version - Release v1.1</div>
       <div style="margin-bottom: 30px;">FireInc Studios 2025</div>
       <div>Official Website: <a style="color: red; text-decoration: none;" href="https://fireinc.pp.ua">https://fireinc.pp.ua</a></div>
     </div>

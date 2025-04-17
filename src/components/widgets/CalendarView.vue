@@ -20,15 +20,23 @@ const YearMonths = [
 
 const month = ref('')
 const WeekDayMonthStart = ref('')
+const Year = ref('')
 
 const date = new Date()
 const firstOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+Year.value = date.getFullYear()
 
 month.value = YearMonths[parseInt(date.getMonth())]
 
 function SetWeekDayMonthStart() {
     WeekDayMonthStart.value = firstOfMonth.getDay() - 1
 }
+
+function getDaysInMonth() {
+  return new Date(2025, date.getMonth() + 1, 0).getDate()
+}
+
+console.log(getDaysInMonth())
 
 SetWeekDayMonthStart()
 
@@ -39,7 +47,7 @@ console.log(WeekDayMonthStart.value)
 <template>
   <main>
     <h1>Calendar</h1>
-    <p>{{ month }}</p>
+    <p>{{ month }} - {{ Year }}</p>
     <div class="calendar">
         <div class="item">Mon</div>
         <div class="item">Tue</div>
@@ -48,10 +56,8 @@ console.log(WeekDayMonthStart.value)
         <div class="item">Fri</div>
         <div class="item">Sat</div>
         <div class="item">Sun</div>
-        <div class="item" />
-        <div class="item">1</div>
-        <div class="item">2</div>
-        <div class="item">3</div>
+        <div class="item" v-for="n in WeekDayMonthStart"/>
+        <div class="item" v-for="j in getDaysInMonth()" :key="j" :class="{ highlight: j === date.getDate() }">{{ j }}</div>
     </div>
   </main>
 </template>
@@ -73,18 +79,23 @@ p {
 }
 
 .calendar {
-    display: flex;
-    flex-wrap: wrap;
-    width: 245px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 245px;
 }
 
 .calendar > .item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 35px;
-    height: 35px;
-    background-color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 5px;
+}
+
+.highlight {
+  background-color: tomato;
+  color: white;
 }
 
 </style>
