@@ -13,14 +13,26 @@ const name = ref('')
 const date = ref('')
 const time = ref('')
 
+const isError = ref(false)
+
+function clearForm() {
+  name.value = ''
+  date.value = ''
+  time.value = ''
+}
+
 function submitForm() {
-  addEvent({
-    name: name.value,
-    date: date.value,
-    time: time.value,
-  })
-  
-  // console.log(Date.now())
+  isError.value = false
+  if (name.value && date.value) {
+    addEvent({
+      name: name.value,
+      date: date.value,
+      time: time.value,
+    })
+    clearForm()
+  } else {
+    isError.value = true
+  }
 }
 
 
@@ -75,6 +87,7 @@ function handleTimeUpdate(event) {
           <input type="text" name="" id="" v-model="name">
         </label>
         <button class="add">+</button>
+        <span class="error" v-if="isError">Please, type something in these inputs</span>
       </div>
       <div>
         <label for="">
@@ -131,5 +144,8 @@ input {
   align-items: center;
 }
 
+.error {
+  color: red;
+}
 
 </style>

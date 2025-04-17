@@ -7,8 +7,12 @@ const APIurl = 'https://api.openweathermap.org/data/2.5/weather?units=metric'
 
 const temp = ref('')
 const city = ref('')
-const weather = ref('')
+const weatherStatus = ref('')
+const weatherDescription = ref("")
 const country = ref('')
+
+const weatherImg = computed(() => weatherStatus.value && `https://openweathermap.org/img/wn/${weatherStatus.value}@2x.png`)
+
 
 // const lon = computed(() => navigator.geolocation.getCurrentPosition((position) => position.coords.longitude));
 // const lat = computed(() => navigator.geolocation.getCurrentPosition((position) => position.coords.latitude));
@@ -31,18 +35,21 @@ async function getWeatherData() {
   console.log(`&lat=${lat.value}&lon=${lon.value}`)
   const response = await fetch(APIurl + `&appid=${APIkey}&lat=${lat.value}&lon=${lon.value}`)
   var data = await response.json()
+  const { description, icon } = data.weather[0]
+  weatherStatus.value = icon
+  weatherDescription.value = description
   temp.value = data.main.temp
   city.value = data.name
   country.value = data.sys.country
-  weather.value = data.weather[0].main 
+  console.log(data)
   return response
 }
 
 onMounted(async () => {
   await getCoords()
   await getWeatherData()
-  // setInterval(() => getCoords(), 10 * 60 * 1000)
-  // setInterval(() => getWeatherData(), 2 * 60 * 1000)
+  setInterval(() => getCoords(), 10 * 60 * 1000)
+  setInterval(() => getWeatherData(), 2 * 60 * 1000)
 })
 
 </script>
@@ -51,7 +58,8 @@ onMounted(async () => {
 <main>
   <h3>Weather Forecast</h3>
   <div class="main">
-    <img src="@/assets/images/weather/clear.png" width="150px" alt="">
+    <img :src="weatherImg" width="150px" alt="">
+    <p>{{ weatherDescription }}</p>
     <h1 id="temp">{{ Math.round(temp) }}°c</h1>
     <h2 id="region">{{ city }}, {{ country }}</h2>
   </div>

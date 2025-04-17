@@ -6,6 +6,7 @@ import { computed } from 'vue';
 import { ref } from 'vue';
 
 import WeatherView from './widgets/WeatherView.vue';
+import CurrencyView from './widgets/CurrencyView.vue';
 
 const { isWidgetNav } = storeToRefs(useStatusesStore())
 
@@ -54,6 +55,7 @@ const fullDate = computed(
         <span class="title">{{ fullTime }}</span>
         <span class="date">{{ fullDate }}</span>
         <WeatherView />
+        <CurrencyView />
     </div>
 </template>
 
