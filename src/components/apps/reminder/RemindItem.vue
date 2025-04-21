@@ -1,18 +1,27 @@
 <script setup>
 
+import { computed } from 'vue'
+
 import checkmark from '@/assets/images/checkmark.png'
-import crossmark from '@/assets/images/crossmark.png'
 import progressmark from '@/assets/images/progressmark.png'
-defineProps([
+
+const props = defineProps([
   "event"
 ])
+
+const currentTime = new Date().toISOString().split('T')[1].slice(0,5)
+
+const markImage = computed(() => {
+  const eventDate = `${props.event.date}T${props.event.time}`
+  return new Date(eventDate).getTime() < Date.now() ? checkmark : progressmark
+})
 
 </script>
 
 <template>
   <div class="reminder">
     <div class="reminder__status">
-      <img width="60%" height="60%" :src="progressmark" alt="">
+      <img width="60%" height="60%" :src="markImage" alt="">
     </div>
     <div class="reminder__data">
       <h3>{{ event.name }}</h3>

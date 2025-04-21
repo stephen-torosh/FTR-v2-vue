@@ -1,7 +1,7 @@
 <script setup>
 
 import { computed } from 'vue';
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 import RemindItem from './reminder/RemindItem.vue';
 import { useReminderStore } from '@/stores/reminder'
 import { storeToRefs } from 'pinia';
@@ -35,7 +35,11 @@ function submitForm() {
   }
 }
 
-
+const event = new Date();
+const options = {
+  hour: "2-digit",
+  minute: "2-digit"
+};
 
 
 const currentDate = new Date(); 
@@ -45,20 +49,24 @@ const isDateInputSelected = computed(() => !date.value);
 
 function handleTimeUpdate(event) {
   const inputTime = event.target.value
-  const currentTime = new Date().toISOString().split('T')[1].slice(0,5)
+  const currentTime = new Date().toLocaleDateString(undefined, options).split(',')[1].slice(1,6)
   const dateNow = new Date(fullDate.value).getTime()
   const dateInp = new Date(date.value).getTime()
   console.log(dateNow, dateInp)
   console.log(new Date(fullDate.value))
   if (dateNow === dateInp) {
-    time.value = currentTime
+    
 
     const totalTime = time.value.split(':').reduce((accumulator, element, index) => {
-      return index ? accumulator + element : accumulator + element * 60
+      return Number(index ? accumulator + element : accumulator + element * 60)
     }, 0)
     const totalCurrentTime = currentTime.split(':').reduce((accumulator, element, index) => {
-      return index ? accumulator + element : accumulator + element * 60
+      return Number(index ? accumulator + element : accumulator + element * 60)
     }, 0)
+
+    if (totalTime < totalCurrentTime) {
+      time.value = currentTime
+    }
     
     console.log(totalTime, totalCurrentTime)
   } else {
