@@ -145,32 +145,32 @@ function mouseClick($event) {
           </button>
         </div>
         <div class="navbar__applaunch-button">
-          <RouterLink style="text-decoration: none; width: 65%; height: 65%;" to="/desktop/app/FTR">
+          <RouterLink class="navbar__applaunch-button-style" to="/desktop/app/FTR">
             <img height="100%" :src="ftrIcon" alt="">
           </RouterLink>
         </div>
         <div class="navbar__applaunch-button">
-          <RouterLink style="text-decoration: none; width: 65%; height: 65%;" to="/desktop/app/browser">
+          <RouterLink class="navbar__applaunch-button-style" to="/desktop/app/browser">
             <img height="100%" :src="browserIcon" alt="">
           </RouterLink>
         </div>
         <div class="navbar__applaunch-button">
-          <RouterLink style="text-decoration: none; width: 65%; height: 65%;" to="/desktop/app/settings">
+          <RouterLink class="navbar__applaunch-button-style" to="/desktop/app/settings">
             <img height="100%" :src="settingsIcon" alt="">
           </RouterLink>
         </div>
         <div class="navbar__applaunch-button">
-          <RouterLink style="text-decoration: none; width: 65%; height: 65%;" to="/desktop/app/calculator">
+          <RouterLink class="navbar__applaunch-button-style" to="/desktop/app/calculator">
             <img height="100%" :src="calculatorIcon" alt="">
           </RouterLink>
         </div>
         <div class="navbar__applaunch-button">
-          <RouterLink style="text-decoration: none; width: 65%; height: 65%;" to="/desktop/app/reminder">
+          <RouterLink class="navbar__applaunch-button-style" to="/desktop/app/reminder">
             <img height="100%" :src="reminderIcon" alt="">
           </RouterLink>
         </div>
         <div class="navbar__applaunch-button">
-          <RouterLink style="text-decoration: none; width: 65%; height: 65%;" to="/desktop/app/File%20Exp">
+          <RouterLink class="navbar__applaunch-button-style" to="/desktop/app/File%20Exp">
             <img height="100%" :src="fexpIcon" alt="">
           </RouterLink>
         </div>
@@ -239,4 +239,12 @@ function mouseClick($event) {
 .navbar__center {
   margin: 0 auto;
 }
+
+.navbar__applaunch-button-style {
+  text-decoration: none;
+  width: 65%; 
+  height: 65%;
+}
+
+
 </style>

@@ -5,6 +5,7 @@ import { ref } from 'vue';
 const browserUrl = ref('')
 const contents = ref('')
 
+
 var cors_api_host = '0.0.0.0:8000';
 var cors_api_url = 'https://www.google.com' + cors_api_host + '/';
 var slice = [].slice;
