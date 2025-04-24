@@ -56,7 +56,7 @@ console.log(WeekDayMonthStart.value)
         <div class="item">Fri</div>
         <div class="item">Sat</div>
         <div class="item">Sun</div>
-        <div class="item" v-for="n in WeekDayMonthStart"/>
+        <div class="item" v-for="n in WeekDayMonthStart" :key="n" />
         <div class="item" v-for="j in getDaysInMonth()" :key="j" :class="{ highlight: j === date.getDate() }">{{ j }}</div>
     </div>
   </main>
