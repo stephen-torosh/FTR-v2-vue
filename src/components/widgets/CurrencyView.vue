@@ -11,7 +11,7 @@ const currencyList = ["USD", "GBP", "EUR"]
   <main>
     <div>
       <h1>Current currency cost</h1>
-      <p>To Ukrainain Hryvnia</p>
+      <p>To Ukrainian Hryvnia</p>
     </div>
     <CurrencyItem v-for="item in currencyList" :key="item" :currency="item"/>
   </main>
