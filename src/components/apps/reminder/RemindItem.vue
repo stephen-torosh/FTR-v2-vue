@@ -9,12 +9,7 @@ const props = defineProps([
   "event"
 ])
 
-const currentTime = new Date().toISOString().split('T')[1].slice(0,5)
-
-const markImage = computed(() => {
-  const eventDate = `${props.event.date}T${props.event.time}`
-  return new Date(eventDate).getTime() < Date.now() ? checkmark : progressmark
-})
+const markImage = computed(() => props.event.status ? checkmark : progressmark)
 
 </script>
 

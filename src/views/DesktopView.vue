@@ -16,6 +16,7 @@ import { useSettingsStore } from '@/stores/settings'
 import { computed, ref, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import ScreenSleepPicker from '@/components/ScreenSleepPicker.vue'
+import { useReminderStore } from '@/stores/reminder'
 
 const statusStore = useStatusesStore()
 const { isMenuShown, isUnlocked, screenSaverStyler, isWidgetNav } = storeToRefs(statusStore)
@@ -25,9 +26,10 @@ onMounted(() => {
 })
 
 const settingsStore = useSettingsStore()
-const { brightness, screenSaver, launchcenter } = storeToRefs(settingsStore)
+const reminderStore = useReminderStore()
 
-const { backgroundId } = storeToRefs(settingsStore)
+const { brightness, screenSaver, launchcenter, backgroundId } = storeToRefs(settingsStore)
+const { checkExpiredEvents } = reminderStore
 
 const bg1 = computed(() => {
   return backgroundId.value == 1
@@ -88,8 +90,12 @@ function onLaunchClick() {
 
 const date = ref(new Date())
 
+
 setInterval(() => {
   date.value = new Date()
+  if (date.value.getSeconds() === 0) {
+    checkExpiredEvents()
+  }
 }, 1000)
 
 const fullTime = computed(

@@ -28,6 +28,7 @@ function submitForm() {
       name: name.value,
       date: date.value,
       time: time.value,
+      status: false
     })
     clearForm()
   } else {

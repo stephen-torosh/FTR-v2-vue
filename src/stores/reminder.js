@@ -9,6 +9,15 @@ export const useReminderStore = defineStore('reminder', {
   actions: {
     addEvent(eventData) {
       this.events.push(eventData)
+    },
+    checkExpiredEvents() {
+      this.events = this.events.map((event) => {
+        const eventDate = `${event.date}T${event.time}`
+        if (new Date(eventDate).getTime() < Date.now()) {
+          event.status = true
+        }
+        return event
+      }) 
     }
   }
 })
