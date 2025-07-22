@@ -56,8 +56,8 @@ console.log(WeekDayMonthStart.value)
         <div class="item">Fri</div>
         <div class="item">Sat</div>
         <div class="item">Sun</div>
-        <div class="item" v-for="n in WeekDayMonthStart"/>
-        <div class="item" v-for="j in getDaysInMonth()" :key="j" :class="{ highlight: j === date.getDate() }">{{ j }}</div>
+        <div class="item" v-for="dayPadding in WeekDayMonthStart" :key="dayPadding" />
+        <div class="item" v-for="dayNum in getDaysInMonth()" :key="dayNum" :class="{ highlight: dayNum === date.getDate() }">{{ dayNum }}</div>
     </div>
   </main>
 </template>

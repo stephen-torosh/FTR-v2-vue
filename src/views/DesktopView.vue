@@ -110,13 +110,14 @@ function hideLaunchWindow() {
 function mouseClick($event) {
   const mouseX = $event.clientX
   const innerX = window.innerWidth
-
-  if (innerX - mouseX < 50) {
-    console.log("open")
-    isWidgetNav.value = true
-  } else if (innerX - mouseX > 400) {
-    console.log("close")
-    isWidgetNav.value = false
+  if (isUnlocked.value) {
+    if (innerX - mouseX < 50) {
+      console.log("open")
+      isWidgetNav.value = true
+    } else if (innerX - mouseX > 400) {
+      console.log("close")
+      isWidgetNav.value = false
+    }
   }
 }
 

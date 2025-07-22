@@ -1,24 +1,42 @@
 <script setup>
 
 import folderimg from '@/assets/images/Folder.png'
+import fileimg from '@/assets/images/File.svg'
 import bucket from '@/assets/images/remove-bucket.svg'
 import rename from '@/assets/images/rename.svg'
+
+import { storeToRefs } from 'pinia'
+
+import { useFileSystem } from '@/stores/files'
+
+const fileStore = useFileSystem()
+
+const { downloads, documents, apps } = storeToRefs(fileStore)
+const { setActiveTab, setActiveDir } = fileStore
+
+function handleClick(item) {
+  if (item.type === "folder") {
+    setActiveDir(item.name)
+  }
+}
 
 </script>
 
 <template>
 <div class="wrapper">
   <nav>
-    <button>Downloads</button>
-    <button>Documents</button>
-    <button>Apps</button>
+    <button @click="setActiveTab('downloads', downloads)" :class="{ 'buttonActive': activeTab === 'downloads'}">Downloads</button>
+    <button @click="setActiveTab('documents', documents)" :class="{ 'buttonActive': activeTab === 'documents'}">Documents</button>
+    <button @click="setActiveTab('apps', apps)" :class="{ 'buttonActive': activeTab === 'apps'}">Apps</button>
   </nav>
 
   <div class="content">
 
     <div class="folderNavbar">dd</div>
-    <div class="item">
-      <img width="90" height="90" :src="folderimg" alt="">
+
+
+    <div class="item" v-for="item in activeTabInfo" :key="item" @click="handleClick(item)">
+      <img width="90" height="90" :src="item.type === 'folder' ? folderimg : fileimg" alt="">
       <div class="managementBar">
         <button>
           <img width="20" height="20" :src="bucket" alt="">
@@ -27,8 +45,10 @@ import rename from '@/assets/images/rename.svg'
           <img width="20" height="20" :src="rename" alt="">
         </button>
       </div>
-      <h2>New Folder</h2>
+      <h2>{{ item.name }}</h2>
     </div>
+
+    <h2 v-show="!activeTabInfo[0]" style="margin: 10px;">Nothing to show...</h2>
 
   </div>
 </div>
@@ -62,8 +82,12 @@ nav > button {
   border-radius: 5px;
   font-family: Caveat;
   font-size: 20px;
-  background-color: black;
   background-color: rgb(216, 216, 216);
+}
+
+.buttonActive {
+  background-color: rgb(138, 138, 138);
+  color: white;
 }
 
 .content {
