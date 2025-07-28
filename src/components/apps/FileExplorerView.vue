@@ -11,14 +11,16 @@ import { useFileSystem } from '@/stores/files'
 
 const fileStore = useFileSystem()
 
-const { downloads, documents, apps } = storeToRefs(fileStore)
-const { setActiveTab, setActiveDir } = fileStore
+const { downloads, documents, apps, activeDirectory, activeTab, content, getDirectoryPath, } = storeToRefs(fileStore)
+const { setActiveTab, changeActiveDir } = fileStore
 
 function handleClick(item) {
   if (item.type === "folder") {
-    setActiveDir(item.name)
+    changeActiveDir(item.name)
   }
 }
+
+setActiveTab("downloads")
 
 </script>
 
@@ -32,10 +34,10 @@ function handleClick(item) {
 
   <div class="content">
 
-    <div class="folderNavbar">dd</div>
+    <div class="folderNavbar">{{ getDirectoryPath }}</div>
 
 
-    <div class="item" v-for="item in activeTabInfo" :key="item" @click="handleClick(item)">
+    <div class="item" v-for="item in content" :key="item" @click="handleClick(item)">
       <img width="90" height="90" :src="item.type === 'folder' ? folderimg : fileimg" alt="">
       <div class="managementBar">
         <button>
@@ -48,7 +50,7 @@ function handleClick(item) {
       <h2>{{ item.name }}</h2>
     </div>
 
-    <h2 v-show="!activeTabInfo[0]" style="margin: 10px;">Nothing to show...</h2>
+    <!--<h2 v-show="!activeTabInfo[0]" style="margin: 10px;">Nothing to show...</h2>-->
 
   </div>
 </div>
