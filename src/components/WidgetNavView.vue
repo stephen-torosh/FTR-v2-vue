@@ -1,6 +1,7 @@
 <script setup>
 
 import { useStatusesStore } from '@/stores/statuses';
+import { useReminderStore } from '@/stores/reminder';
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 import { ref } from 'vue';
@@ -8,16 +9,12 @@ import { ref } from 'vue';
 import WeatherView from './widgets/WeatherView.vue';
 import CurrencyView from './widgets/CurrencyView.vue';
 import CalendarView from './widgets/CalendarView.vue';
-import TimeView from './widgets/TimeView.vue'
+import RemindItem from './apps/reminder/RemindItem.vue';
 
 const { isWidgetNav } = storeToRefs(useStatusesStore())
+const { getReadyEvents } = storeToRefs(useReminderStore())
 
 const date = ref(new Date())
-
-
-
-
-
 
 setInterval(() => {
   date.value = new Date()
@@ -56,6 +53,9 @@ const fullDate = computed(
     <div class="container" :class="{ 'container-show': isWidgetNav }">
         <span class="title">{{ fullTime }}</span>
         <span class="date">{{ fullDate }}</span>
+        <div class="reminder-wrapper">
+          <RemindItem v-for="event in getReadyEvents" :key="event.name" :event/>
+        </div>
         <WeatherView />
         <CurrencyView />
         <CalendarView />
@@ -76,8 +76,15 @@ const fullDate = computed(
   background-color: rgba(0, 0, 0, 0.204);
   transition: 0.15s;
   backdrop-filter: blur(4px);
-
   overflow-y: scroll;
+}
+
+.reminder-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  margin-bottom: 25px;
 }
 
 .container-show {

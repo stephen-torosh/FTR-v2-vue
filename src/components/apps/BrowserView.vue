@@ -32,8 +32,8 @@ async function browserSubmitFunc() {
 <template>
   
   <div class="navbrowser">
-    <input type="text" id="browser-url" v-model="browserUrl"/>
-    <button @click="browserSubmitFunc()" id="browser-submit">search</button>
+    <input id="browser-url" v-model="browserUrl" type="text"/>
+    <button id="browser-submit" @click="browserSubmitFunc()">search</button>
   </div>
   <div class="content">
     <div id="browser-contents" v-html="contents" />

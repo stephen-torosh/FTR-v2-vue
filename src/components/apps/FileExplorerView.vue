@@ -5,13 +5,15 @@ import fileimg from '@/assets/images/File.svg'
 import bucket from '@/assets/images/remove-bucket.svg'
 import rename from '@/assets/images/rename.svg'
 
+import FolderNavbar from './fileexp/FolderNavbar.vue'
+
 import { storeToRefs } from 'pinia'
 
 import { useFileSystem } from '@/stores/files'
 
 const fileStore = useFileSystem()
 
-const { downloads, documents, apps, activeDirectory, activeTab, content, getDirectoryPath, } = storeToRefs(fileStore)
+const { downloads, documents, apps, desktop, activeDirectory, activeTab, content, getDirectoryPath } = storeToRefs(fileStore)
 const { setActiveTab, changeActiveDir } = fileStore
 
 function handleClick(item) {
@@ -27,17 +29,18 @@ setActiveTab("downloads")
 <template>
 <div class="wrapper">
   <nav>
-    <button @click="setActiveTab('downloads', downloads)" :class="{ 'buttonActive': activeTab === 'downloads'}">Downloads</button>
-    <button @click="setActiveTab('documents', documents)" :class="{ 'buttonActive': activeTab === 'documents'}">Documents</button>
-    <button @click="setActiveTab('apps', apps)" :class="{ 'buttonActive': activeTab === 'apps'}">Apps</button>
+    <button :class="{ 'buttonActive': activeTab === 'Main Page'}" @click="setActiveTab('Main Page', main)">Main Page</button>
+    <button :class="{ 'buttonActive': activeTab === 'downloads'}" @click="setActiveTab('downloads', downloads)">Downloads</button>
+    <button :class="{ 'buttonActive': activeTab === 'documents'}" @click="setActiveTab('documents', documents)">Documents</button>
+    <button :class="{ 'buttonActive': activeTab === 'apps'}" @click="setActiveTab('apps', apps)">Apps</button>
+    <button :class="{ 'buttonActive': activeTab === 'desktop'}" @click="setActiveTab('desktop', desktop)">Desktop</button>
   </nav>
 
   <div class="content">
 
-    <div class="folderNavbar">{{ getDirectoryPath }}</div>
+    <folder-navbar />
 
-
-    <div class="item" v-for="item in content" :key="item" @click="handleClick(item)">
+    <div v-for="item in content" :key="item" class="item" @click="handleClick(item)">
       <img width="90" height="90" :src="item.type === 'folder' ? folderimg : fileimg" alt="">
       <div class="managementBar">
         <button>
@@ -48,6 +51,12 @@ setActiveTab("downloads")
         </button>
       </div>
       <h2>{{ item.name }}</h2>
+    </div>
+
+    <div v-if="activeTab === 'Main Page'">
+      <h1>Welcome to File Explorer!</h1>
+      <p>In this version we replaced <b>FTR terminal</b> that used <b>Windows</b> as the main place to store files and folders, with an <b>independent file system</b> that you can manage <b>in this app</b></p>
+      <p>Unfortunately in <b>FlareOS 1.1</b> it's still in development, <b>without any profitable use</b></p>
     </div>
 
     <!--<h2 v-show="!activeTabInfo[0]" style="margin: 10px;">Nothing to show...</h2>-->
@@ -135,11 +144,14 @@ nav > button {
   background-color: rgb(234, 105, 105);
 }
 
-.folderNavbar {
-  padding: 10px;
-  width: 1007px;
-  height: 50px;
-  box-shadow: 5px 0px 20px rgba(99, 99, 99, 0.6745098039);
+h1, p {
+  margin: 10px;
+}
+
+p {
+  color: rgb(73, 73, 73);
+  font-size: 20px;
+  max-width: 500px;
 }
 
 </style>

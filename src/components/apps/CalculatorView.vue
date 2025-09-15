@@ -54,26 +54,26 @@ function buttonclicked(key) {
     <div class="calculator">
       <div class="calculator__result">{{ calculatorSTR }}</div>
       <div class="calculator-buttons">
-        <button @click="buttonclicked('C')" class="calculator__buttons">C</button>
-        <button @click="buttonclicked('del')" class="calculator__buttons">del</button>
+        <button class="calculator__buttons" @click="buttonclicked('C')">C</button>
+        <button class="calculator__buttons" @click="buttonclicked('del')">del</button>
         <button class="calculator__buttons"></button>
-        <button @click="buttonclicked('*')" class="calculator__buttons">*</button>
-        <button @click="buttonclicked('7')" class="calculator__buttons">7</button>
-        <button @click="buttonclicked('8')" class="calculator__buttons">8</button>
-        <button @click="buttonclicked('9')" class="calculator__buttons">9</button>
-        <button @click="buttonclicked('/')" class="calculator__buttons">/</button>
-        <button @click="buttonclicked('4')" class="calculator__buttons">4</button>
-        <button @click="buttonclicked('5')" class="calculator__buttons">5</button>
-        <button @click="buttonclicked('6')" class="calculator__buttons">6</button>
-        <button @click="buttonclicked('-')" class="calculator__buttons">-</button>
-        <button @click="buttonclicked('1')" class="calculator__buttons">1</button>
-        <button @click="buttonclicked('2')" class="calculator__buttons">2</button>
-        <button @click="buttonclicked('3')" class="calculator__buttons">3</button>
-        <button @click="buttonclicked('+')" class="calculator__buttons">+</button>
-        <button @click="buttonclicked('-/+')" class="calculator__buttons">-/+</button>
-        <button @click="buttonclicked('0')" class="calculator__buttons">0</button>
-        <button @click="buttonclicked('.')" class="calculator__buttons">.</button>
-        <button @click="buttonclicked('=')" class="calculator__buttons">=</button>
+        <button class="calculator__buttons" @click="buttonclicked('*')">*</button>
+        <button class="calculator__buttons" @click="buttonclicked('7')">7</button>
+        <button class="calculator__buttons" @click="buttonclicked('8')">8</button>
+        <button class="calculator__buttons" @click="buttonclicked('9')">9</button>
+        <button class="calculator__buttons" @click="buttonclicked('/')">/</button>
+        <button class="calculator__buttons" @click="buttonclicked('4')">4</button>
+        <button class="calculator__buttons" @click="buttonclicked('5')">5</button>
+        <button class="calculator__buttons" @click="buttonclicked('6')">6</button>
+        <button class="calculator__buttons" @click="buttonclicked('-')">-</button>
+        <button class="calculator__buttons" @click="buttonclicked('1')">1</button>
+        <button class="calculator__buttons" @click="buttonclicked('2')">2</button>
+        <button class="calculator__buttons" @click="buttonclicked('3')">3</button>
+        <button class="calculator__buttons" @click="buttonclicked('+')">+</button>
+        <button class="calculator__buttons" @click="buttonclicked('-/+')">-/+</button>
+        <button class="calculator__buttons" @click="buttonclicked('0')">0</button>
+        <button class="calculator__buttons" @click="buttonclicked('.')">.</button>
+        <button class="calculator__buttons" @click="buttonclicked('=')">=</button>
       </div>
     </div>
   </div>

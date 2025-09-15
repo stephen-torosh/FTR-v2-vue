@@ -2,7 +2,6 @@
 import ftrIcon from '@/assets/images/firetr.png'
 import browserIcon from '@/assets/images/browser.png'
 import settingsIcon from '@/assets/images/settings.png'
-import firetrLogo from '@/assets/images/fireTR-OS-logo.png'
 import fexpIcon from '@/assets/images/FileExp.png'
 import BaseAppLauncher from '@/components/base-components/BaseAppLauncher.vue'
 import LaunchWindow from '@/components/LaunchWindowView.vue'
@@ -17,9 +16,10 @@ import { computed, ref, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import ScreenSleepPicker from '@/components/ScreenSleepPicker.vue'
 import { useReminderStore } from '@/stores/reminder'
+import DesktopNavbar from '@/components/DesktopNavbar.vue'
 
 const statusStore = useStatusesStore()
-const { isMenuShown, isUnlocked, screenSaverStyler, isWidgetNav } = storeToRefs(statusStore)
+const { isUnlocked, screenSaverStyler, isWidgetNav } = storeToRefs(statusStore)
 
 onMounted(() => {
   statusStore.startScreenSaverTimer()
@@ -28,7 +28,7 @@ onMounted(() => {
 const settingsStore = useSettingsStore()
 const reminderStore = useReminderStore()
 
-const { brightness, screenSaver, launchcenter, backgroundId } = storeToRefs(settingsStore)
+const { brightness, screenSaver, backgroundId } = storeToRefs(settingsStore)
 const { checkExpiredEvents } = reminderStore
 
 const bg1 = computed(() => {
@@ -80,16 +80,7 @@ const appsIcons = [
   }
 ]
 
-function onLaunchClick() {
-  if (isMenuShown.value) {
-    statusStore.switchMenuStatus(false)
-    return 0
-  }
-  statusStore.switchMenuStatus(true)
-}
-
 const date = ref(new Date())
-
 
 setInterval(() => {
   date.value = new Date()
@@ -98,10 +89,7 @@ setInterval(() => {
   }
 }, 1000)
 
-const fullTime = computed(
-  () =>
-    `${date.value.getHours()}:${date.value.getMinutes() > 9 ? date.value.getMinutes() : `0${date.value.getMinutes()}`}`
-)
+
 
 function hideLaunchWindow() {
   statusStore.switchMenuStatus(false)
@@ -112,10 +100,8 @@ function mouseClick($event) {
   const innerX = window.innerWidth
   if (isUnlocked.value) {
     if (innerX - mouseX < 50) {
-      console.log("open")
       isWidgetNav.value = true
     } else if (innerX - mouseX > 400) {
-      console.log("close")
       isWidgetNav.value = false
     }
   }
@@ -132,9 +118,9 @@ function mouseClick($event) {
     @click="mouseClick($event)"
   >
     <div
-      @click="hideLaunchWindow"
       class="appsDiv"
       :class="{ 'appsDiv--hidden': !isUnlocked || screenSaver }"
+      @click="hideLaunchWindow"
     >
       <BaseAppLauncher
         v-for="app in appsIcons"
@@ -144,46 +130,9 @@ function mouseClick($event) {
         :image-alt="app.imageAlt"
       />
     </div>
-    <div class="navbar" :class="{ 'navbar--hidden': !isUnlocked || screenSaver }">
-      <div class="navbar__left" :class="{ 'navbar__center': launchcenter }">
-        <div class="navbar__applaunch-button">
-          <button class="navbar__launch-button" style="text-decoration: none; width: 65%; height: 65%;" @click="onLaunchClick">
-            <img height="100%" :src="firetrLogo" alt="">
-          </button>
-        </div>
-        <div class="navbar__applaunch-button">
-          <RouterLink class="navbar__applaunch-button-style" to="/desktop/app/FTR">
-            <img height="100%" :src="ftrIcon" alt="">
-          </RouterLink>
-        </div>
-        <div class="navbar__applaunch-button">
-          <RouterLink class="navbar__applaunch-button-style" to="/desktop/app/browser">
-            <img height="100%" :src="browserIcon" alt="">
-          </RouterLink>
-        </div>
-        <div class="navbar__applaunch-button">
-          <RouterLink class="navbar__applaunch-button-style" to="/desktop/app/settings">
-            <img height="100%" :src="settingsIcon" alt="">
-          </RouterLink>
-        </div>
-        <div class="navbar__applaunch-button">
-          <RouterLink class="navbar__applaunch-button-style" to="/desktop/app/calculator">
-            <img height="100%" :src="calculatorIcon" alt="">
-          </RouterLink>
-        </div>
-        <div class="navbar__applaunch-button">
-          <RouterLink class="navbar__applaunch-button-style" to="/desktop/app/reminder">
-            <img height="100%" :src="reminderIcon" alt="">
-          </RouterLink>
-        </div>
-        <div class="navbar__applaunch-button">
-          <RouterLink class="navbar__applaunch-button-style" to="/desktop/app/File%20Exp">
-            <img height="100%" :src="fexpIcon" alt="">
-          </RouterLink>
-        </div>
-      </div>
-      <div class="navbar__right">{{ fullTime }}</div>
-    </div>
+
+    <DesktopNavbar />
+                                 
     <LaunchWindow id="launchwindow" />
     <RouterView />
     <ScreenSleep v-if="screenSaver" />

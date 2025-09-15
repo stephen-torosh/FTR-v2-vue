@@ -36,10 +36,10 @@ const userPassword = ref('')
     <form @submit.prevent="unlockScreen(userPassword)">
       <label for="password"
         ><input
-          type="password"
-          v-model="userPassword"
-          name="password"
           id="password"
+          v-model="userPassword"
+          type="password"
+          name="password"
           placeholder="password"
         />
       </label>
@@ -47,7 +47,7 @@ const userPassword = ref('')
       <button type="submit">unlock</button>
     </form>
   </div>
-  <div class="intro" v-if="introVue" :class="{ transIntro: transition, introEnd: intro }">
+  <div v-if="introVue" class="intro" :class="{ transIntro: transition, introEnd: intro }">
     <img class="flareos" :class="{ transImg: transition }" width="200" height="200" src="@/assets/images/fireTR-OS-logo.png" alt="">
     <div class="box" :class="{ transBox: transition}"></div>
     <h1 class="title" :class="{ transTitle: transition }">FlareOS</h1>

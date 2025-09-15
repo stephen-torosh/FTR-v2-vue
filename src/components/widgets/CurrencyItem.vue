@@ -12,7 +12,6 @@ const dataReady = ref(false)
 onBeforeMount(async () => {
   const response = await fetch(`https://currency-rate-exchange-api.onrender.com/${props.currency.toLowerCase()}`)
   currencyData.value = await response.json()
-  console.log(currencyData.value)
   dataReady.value = true
 })
 

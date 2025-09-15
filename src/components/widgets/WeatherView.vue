@@ -22,9 +22,8 @@ const lat = ref(0)
 
 function getCoords() { 
   return new Promise((resolve, reject) => {
-      navigator.geolocation.getCurrentPosition((position) => {lon.value = position.coords.longitude; console.log(position.coords.longitude)})
-      navigator.geolocation.getCurrentPosition((position) => {lat.value = position.coords.latitude; console.log(position.coords.latitude)})
-      console.log(lon.value, lat.value)
+      navigator.geolocation.getCurrentPosition((position) => {lon.value = position.coords.longitude;})
+      navigator.geolocation.getCurrentPosition((position) => {lat.value = position.coords.latitude;})
     setTimeout(() => {
       resolve()
     },500)
@@ -32,7 +31,6 @@ function getCoords() {
 }
 
 async function getWeatherData() {
-  console.log(`&lat=${lat.value}&lon=${lon.value}`)
   const response = await fetch(APIurl + `&appid=${APIkey}&lat=${lat.value}&lon=${lon.value}`)
   var data = await response.json()
   const { description, icon } = data.weather[0]
@@ -41,7 +39,6 @@ async function getWeatherData() {
   temp.value = data.main.temp
   city.value = data.name
   country.value = data.sys.country
-  console.log(data)
   return response
 }
 

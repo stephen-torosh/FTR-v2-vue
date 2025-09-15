@@ -52,9 +52,9 @@ function changepass() {
     <label for="">
       Old Password:
       <input
-        name=""
         id=""
         v-model="oldpass"
+        name=""
         :type="showpass ? 'type' : 'password'"
         placeholder="old password"
       />
@@ -62,18 +62,18 @@ function changepass() {
     <label for="">
       New Password:
       <input
-        name=""
         id=""
         v-model="newpass"
+        name=""
         :type="showpass ? 'type' : 'password'"
         placeholder="new password"
       />
     </label>
-    <label for=""> Show Password <input type="checkbox" v-model="showpass" /></label>
+    <label for=""> Show Password <input v-model="showpass" type="checkbox" /></label>
     <button class="buttonsub" type="submit">Change Password</button>
   </form>
   <p class="errormessage">{{ errormessage }}</p>
-  <p class="successmessage" v-if="isSuccess">Password changed Successfully!</p>
+  <p v-if="isSuccess" class="successmessage">Password changed Successfully!</p>
 </template>
 
 <style scoped>

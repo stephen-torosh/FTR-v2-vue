@@ -7,7 +7,7 @@ import { useReminderStore } from '@/stores/reminder'
 import { storeToRefs } from 'pinia';
 
 const { addEvent } = useReminderStore()
-const { events } = storeToRefs(useReminderStore())
+const { getNonHistoricalEvents, getHistoricalEvents } = storeToRefs(useReminderStore())
 
 const name = ref('')
 const date = ref('')
@@ -28,7 +28,8 @@ function submitForm() {
       name: name.value,
       date: date.value,
       time: time.value,
-      status: false
+      status: false,
+      isHistory: false,
     })
     clearForm()
   } else {
@@ -53,11 +54,8 @@ function handleTimeUpdate(event) {
   const currentTime = new Date().toLocaleDateString(undefined, options).split(',')[1].slice(1,6)
   const dateNow = new Date(fullDate.value).getTime()
   const dateInp = new Date(date.value).getTime()
-  console.log(dateNow, dateInp)
-  console.log(new Date(fullDate.value))
   if (dateNow === dateInp) {
     
-
     const totalTime = time.value.split(':').reduce((accumulator, element, index) => {
       return Number(index ? accumulator + element : accumulator + element * 60)
     }, 0)
@@ -69,11 +67,8 @@ function handleTimeUpdate(event) {
       time.value = currentTime
     }
     
-    console.log(totalTime, totalCurrentTime)
   } else {
     time.value = event.target.value
-    console.log(inputTime)
-
   }
 }
 
@@ -88,38 +83,48 @@ function handleTimeUpdate(event) {
 
 <template>
   <div class="wrapper">
-    
-    <h2 class="title">Reminder</h2>
-    <form @submit.prevent="submitForm">
-      <div class="wrapper-main">
-        <label for="">
-          <input type="text" name="" id="" v-model="name">
-        </label>
-        <button class="add">+</button>
-        <span class="error" v-if="isError">Please, type something in these inputs</span>
+    <div class="main">
+      <h2 class="title">Reminder</h2>
+      <form @submit.prevent="submitForm">
+        <div class="wrapper-main">
+          <label for="">
+            <input id="" v-model="name" type="text" name="">
+          </label>
+          <button class="add">+</button>
+          <span v-if="isError" class="error">Please, type something in these inputs</span>
+        </div>
+        <div>
+          <label for="">
+            <input id="" v-model="date" type="date" :min="fullDate" name="">
+          </label>
+          <label for="">
+            <input id="" v-model="time" type="time" :disabled="isDateInputSelected" name="" @change="handleTimeUpdate($event)">
+          </label>
+        </div>
+      </form>
+      <div v-for="event in getNonHistoricalEvents" :key="event.id">
+        <RemindItem class="reminder-item" :event />
       </div>
-      <div>
-        <label for="">
-          <input type="date" :min="fullDate" name="" id="" v-model="date">
-        </label>
-        <label for="">
-          <input type="time" :disabled="isDateInputSelected" name="" id="" v-model="time" @change="handleTimeUpdate($event)">
-        </label>
+      <h1 style="margin-bottom: 15px;">History</h1>
+      <div v-for="event in getHistoricalEvents" :key="event.id">
+        <RemindItem class="reminder-item" :event />
       </div>
-    </form>
-    <div v-for="event in events" :key="event.id">
-      <RemindItem class="reminder-item" :event />
+      {{ minDate }}
     </div>
-    {{ minDate }}
+    
   </div>
 </template>
 
 <style scoped>
 .wrapper {
-  width: 700px;
   height: 100%;
-  margin: auto;
   padding-top: 10px;
+  overflow-y: scroll;
+}
+
+.main {
+  width: 700px;
+  transform: translateX(50%);
 }
 
 .reminder-item {

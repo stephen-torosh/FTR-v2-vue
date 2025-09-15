@@ -20,7 +20,7 @@ async function sendData() {
     }
     prompt.value = ''
   } catch (error) {
-    console.log(error)
+    console.error()
   }
 }
 
@@ -39,7 +39,7 @@ function returnFocus(event) {
 
 <template>
   <div id="terminal">
-    <div class="prompt" v-for="(prompt, index) in commands" :key="index" style="display: flex">
+    <div v-for="(prompt, index) in commands" :key="index" class="prompt" style="display: flex">
       <div>
         FTR:{{ prompt.command }}
         <div style="font-family: system-ui, sans-serif" v-html="prompt.html" />
@@ -48,7 +48,7 @@ function returnFocus(event) {
 
     <div class="prompt">
       FTR:
-      <input type="text" v-model="prompt" @keyup.enter="ftrenter" @blur="returnFocus" ref="input" />
+      <input ref="input" v-model="prompt" type="text" @keyup.enter="ftrenter" @blur="returnFocus" />
     </div>
     <div ref="followBlock"></div>
   </div>

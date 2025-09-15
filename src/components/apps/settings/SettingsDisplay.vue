@@ -37,29 +37,29 @@ const bg4 = computed(() => {
   <div class="centered" style="font-size: x-large">Settings</div>
   <div class="centered">Brightness: {{ brightnessValue }}</div>
   <div class="centered">
-    <input type="range" v-model="brightness" min="20" max="120" step="1" />
+    <input v-model="brightness" type="range" min="20" max="120" step="1" />
   </div>
   <div class="centered">
     Screen Saver:
-    <input type="checkbox" name="" id="" v-model="isScreenSaverOn" />
+    <input id="" v-model="isScreenSaverOn" type="checkbox" name="" />
   </div>
   <div class="centered">
     Screen Saver delay: {{ screensaverdelay }}s
     <div class="centered">
-      <input type="range" v-model="screensaverdelay" min="60" max="180" step="1">
+      <input v-model="screensaverdelay" type="range" min="60" max="180" step="1">
     </div>
   </div>
   <div class="centered">
-    <button @click="screenSaverStylerOn()" class="ScreenSleeper-button">Change Screen Saver Style</button>
+    <button class="ScreenSleeper-button" @click="screenSaverStylerOn()">Change Screen Saver Style</button>
   </div>
   <div style="font-size: 20px;" class="centered">
     Wallpaper
     <div class="wallpaper-items">
       <div>
-        <img @click="settingsStore.setBackgroundId(1)" :class="{ 'unactive': !bg1, 'active': bg1 }" src="/src/assets/images/bg1.png" style="margin-right: 10px;" height="100px" alt="">
-        <img @click="settingsStore.setBackgroundId(2)" :class="{ 'unactive': !bg2, 'active': bg2 }" src="/src/assets/images/bg2.png" style="margin-top: 10px;" height="100px" alt="">
-        <img @click="settingsStore.setBackgroundId(3)" :class="{ 'unactive': !bg3, 'active': bg3 }" src="/src/assets/images/bg3.png" style="margin-left: 10px;" height="100px" alt="">
-        <img @click="settingsStore.setBackgroundId(4)" :class="{ 'unactive': !bg4, 'active': bg4 }" src="/src/assets/images/bg4.png" style="margin-left: 10px;" height="100px" alt="">
+        <img :class="{ 'unactive': !bg1, 'active': bg1 }" src="/src/assets/images/bg1.png" style="margin-right: 10px;" height="100px" alt="" @click="settingsStore.setBackgroundId(1)">
+        <img :class="{ 'unactive': !bg2, 'active': bg2 }" src="/src/assets/images/bg2.png" style="margin-top: 10px;" height="100px" alt="" @click="settingsStore.setBackgroundId(2)">
+        <img :class="{ 'unactive': !bg3, 'active': bg3 }" src="/src/assets/images/bg3.png" style="margin-left: 10px;" height="100px" alt="" @click="settingsStore.setBackgroundId(3)">
+        <img :class="{ 'unactive': !bg4, 'active': bg4 }" src="/src/assets/images/bg4.png" style="margin-left: 10px;" height="100px" alt="" @click="settingsStore.setBackgroundId(4)">
       </div>
     </div>
   </div>

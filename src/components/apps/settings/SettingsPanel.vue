@@ -21,11 +21,11 @@ const ButtonNames = [
   <aside>
     <nav class="nav">
       <button
-        @click="setActiveSetting(item.name)"
         v-for="item in ButtonNames"
-        class="nav__item item"
         :key="item.name"
+        class="nav__item item"
         :class="{ 'nav__item--active': activeSetting === item.name.toLowerCase() }"
+        @click="setActiveSetting(item.name)"
       >
         <img class="item__image" :src="item.icon" alt="" />
         <span class="item__text"

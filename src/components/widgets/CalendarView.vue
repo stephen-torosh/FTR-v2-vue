@@ -36,11 +36,7 @@ function getDaysInMonth() {
   return new Date(2025, date.getMonth() + 1, 0).getDate()
 }
 
-console.log(getDaysInMonth())
-
 SetWeekDayMonthStart()
-
-console.log(WeekDayMonthStart.value)
 
 </script>
 
@@ -56,8 +52,8 @@ console.log(WeekDayMonthStart.value)
         <div class="item">Fri</div>
         <div class="item">Sat</div>
         <div class="item">Sun</div>
-        <div class="item" v-for="dayPadding in WeekDayMonthStart" :key="dayPadding" />
-        <div class="item" v-for="dayNum in getDaysInMonth()" :key="dayNum" :class="{ highlight: dayNum === date.getDate() }">{{ dayNum }}</div>
+        <div v-for="dayPadding in WeekDayMonthStart" :key="dayPadding" class="item" />
+        <div v-for="dayNum in getDaysInMonth()" :key="dayNum" class="item" :class="{ highlight: dayNum === date.getDate() }">{{ dayNum }}</div>
     </div>
   </main>
 </template>

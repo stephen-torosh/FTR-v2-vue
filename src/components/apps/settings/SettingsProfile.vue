@@ -40,16 +40,16 @@ async function getImage($event) {
 </script>
 
 <template>
-  <button v-show="isEditShowed" @click="switchEditMode" class="edit-button">Edit info</button>
-  <button v-show="!isEditShowed" @click="switchEditMode" class="save-button">Save info</button>
+  <button v-show="isEditShowed" class="edit-button" @click="switchEditMode">Edit info</button>
+  <button v-show="!isEditShowed" class="save-button" @click="switchEditMode">Save info</button>
   <div class="centered-flex profile-image">
-    <img :src="avatar" v-if="!avatarImageUrl" class="avatar" width="150px" alt="" />
-    <img :src="avatarImageUrl" class="avatar" v-else width="150px" height="150px" alt="" />
+    <img v-if="!avatarImageUrl" :src="avatar" class="avatar" width="150px" alt="" />
+    <img v-else :src="avatarImageUrl" class="avatar" width="150px" height="150px" alt="" />
     <input
       v-show="!isEditShowed"
+      id=""
       type="file"
       name=""
-      id=""
       accept="image/png, image/jpeg"
       @change="getImage"
     />
